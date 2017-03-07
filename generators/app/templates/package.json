@@ -1,0 +1,28 @@
+{
+    "name": "<%= name %>",
+    "version": "1.0.0",
+    "description": "<%= description %>",
+    "main": "index.js",
+    "author": "<%= author %>",
+    "repository": {
+        "type": "git",
+        "url": "<%= repo %>"
+    },
+    "keywords": [
+        "plugin",
+        "def"
+    ],
+    "license": "<%= license %>",
+    "readmeFilename": "README.md",
+    "dependencies": {},
+    "devDependencies": {
+        "browser-sync": "^2.18.6",
+        "del": "^2.2.2",
+        "gulp": "^3.9.1",
+        "gulp-compass": "^2.1.0",
+        "gulp-concat": "^2.6.1",
+        "gulp-connect": "^5.0.0",
+        "gulp-plumber": "^1.1.0",
+        "gulp-sass": "^3.1.0"
+    }
+}

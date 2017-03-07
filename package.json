@@ -1,0 +1,29 @@
+{
+  "name": "generator-ccfescaffold",
+  "version": "1.0.0",
+  "description": "custom frontend scaffold",
+  "files": [
+    "generators"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/uwcong/generator-ccfescaffold.git"
+  },
+  "keywords": [
+    "yeoman-generator"
+  ],
+  "author": "Cc",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/uwcong/generator-ccfescaffold/issues"
+  },
+  "homepage": "https://github.com/uwcong/generator-ccfescaffold#readme",
+  "devDependencies": {
+    "chalk": "^1.1.3",
+    "yeoman-generator": "^1.1.1",
+    "yosay": "^2.0.0"
+  }
+}

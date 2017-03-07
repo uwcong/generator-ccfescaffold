@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="format-detection" content="telephone=no" />
+    <title>Rebate</title>
+    <link href="../css/main.css" rel="stylesheet">
+    <script src="../js/lib/jquery.min.js"></script>
+    <script>
+        (function() {
+            var docEl = document.documentElement,
+                resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+                recalc = function() {
+                    var clientWidth = docEl.clientWidth;
+                    if (!clientWidth) return;
+                    docEl.style.fontSize = (clientWidth * 0.1) + 'px';
+                };
+            recalc();
+            window.addEventListener(resizeEvt, recalc, false);
+        })();
+    </script>
+</head>
+
+<body ontouchstart="">
+    <div class="g_bd">
+        <div class="g_bd_wrap">
+            <!--<div class="m_title">限時促銷活動</div>-->
+            <div class="m_title">Time-limited Sales</div>
+
+            <div class="m_introduce">
+                <input type="text" id="leftTimeInSec" value="10000" hidden />
+                <p class="countDown" id="countDown">00 : 00 : 00</p>
+                <p class="text" id="endText">恭喜你被選中參與本次活動，現可購買以下特惠商品，千萬別錯過喔！</p>
+                <!--<p class="text" id="endText">Congratulations! You have been selected to attend the promotion event. <br />Choose our offers below and do not miss it!</p>-->
+            </div>
+            <div class="m_list">
+                <ul class="m_list_wrap" id="listContent">
+                    <li class="m_list_item js_listItem">
+                        <dl class="detail">
+                            <dt class="detailName">鑽石60個</dt>
+                            <dd class="detailImg"><img src="../images/testimg.jpg" alt="" /></dd>
+                            <dd class="w_icon w_icon_Tag">贈送 10 J點</dd>
+                        </dl>
+                        <div class="action">
+                            <a href="https://www.baidu.com/" class="w_button js_getAward">TWD 6</a>
+                        </div>
+                    </li>
+                    <li class="m_list_item js_listItem">
+                        <dl class="detail">
+                            <dt class="detailName">鑽石60個</dt>
+                            <dd class="detailImg"><img src="../images/testimg.jpg" alt="" /></dd>
+                            <dd class="w_icon w_icon_Tag">贈送 100 J點</dd>
+                        </dl>
+                        <div class="action">
+                            <a href="https://www.baidu.com/" class="w_button js_getAward">TWD 6</a>
+                        </div>
+                    </li>
+                    <li class="m_list_item js_listItem">
+                        <dl class="detail">
+                            <dt class="detailName">鑽石60個</dt>
+                            <dd class="detailImg"><img src="../images/testimg.jpg" alt="" /></dd>
+                            <dd class="w_icon w_icon_Tag">贈送 100 J點</dd>
+                        </dl>
+                        <div class="action">
+                            <a href="https://www.baidu.com/" class="w_button js_getAward">TWD 6</a>
+                        </div>
+                    </li>
+                    <li class="m_list_item js_listItem">
+                        <dl class="detail">
+                            <dt class="detailName">鑽石60個</dt>
+                            <dd class="detailImg"><img src="../images/testimg.jpg" alt="" /></dd>
+                            <dd class="w_icon w_icon_Tag">贈送 100 J點</dd>
+                        </dl>
+                        <div class="action">
+                            <a href="https://www.baidu.com/" class="w_button js_getAward">TWD 6</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <p class="m_tips"><span class="w_icon w_icon_tip"></span>J點是卓動遊戲平台特有的虛擬交易幣，它可以用來購買遊戲內的一切商品，不支持兌現</p>
+            <!--<p class="m_tips"><span class="w_icon w_icon_tip"></span>JPoint is a kind of virtual trading currency owned by Jodo, which can be used to purchase any items in game but cannot be cashed.</p>-->
+        </div>
+    </div>
+
+    <span class="w_icon w_icon_Close" id="closeDialog">关闭窗口</span>
+
+    <script src="../js/main.js"></script>
+</body>
+
+</html>
