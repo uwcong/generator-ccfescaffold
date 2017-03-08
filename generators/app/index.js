@@ -21,6 +21,7 @@ module.exports = generators.extend({
     // 初始化阶段
     initializing: function() {
         this.log('initializing');
+        this.log(this.sourceRoot());
         this.log(this.templatePath('app'));
         this.log(this.destinationPath('app'));
     },
@@ -86,14 +87,13 @@ module.exports = generators.extend({
 
     // 生成项目目录结构阶段
     writing: function() {
-        // var done = this.async();
         this.log('writing');
         this.fs.copyTpl(
             this.templatePath('package.json'),
             this.destinationPath('package.json'),
             this.props
         );
-        this.fs.copyTpl(
+        this.fs.copy(
             this.templatePath('gulpfile.js'),
             this.destinationPath('gulpfile.js')
         );
