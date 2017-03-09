@@ -2,10 +2,9 @@ var gulp = require('gulp');
 var browserSync = require('browser-sync');
 var reload = browserSync.reload;
 var compass = require('gulp-compass');
-var sass = require('gulp-sass');
-var del = require('del');
 var plumber = require('gulp-plumber');
 var concat = require('gulp-concat');
+var del = require('del');
 
 // 配置
 var config = {

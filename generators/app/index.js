@@ -89,13 +89,21 @@ module.exports = generators.extend({
     writing: function() {
         this.log('writing');
         this.fs.copyTpl(
-            this.templatePath('package.json'),
+            this.templatePath('_package.json'),
             this.destinationPath('package.json'),
             this.props
         );
         this.fs.copy(
             this.templatePath('gulpfile.js'),
             this.destinationPath('gulpfile.js')
+        );
+        this.fs.copy(
+            this.templatePath('LICENSE'),
+            this.destinationPath('LICENSE')
+        );
+        this.fs.copy(
+            this.templatePath('README.md'),
+            this.destinationPath('README.md')
         );
         this.fs.copy(
             this.templatePath('app'),
@@ -112,11 +120,12 @@ module.exports = generators.extend({
     install: function() {
         this.log('install');
         var done = this.async();
-        this.spawnCommand('npm', ['install -d']) //安装项目依赖
+        this.spawnCommand('npm', ['install', '-d']) //安装项目依赖
             .on('exit', function(code) {
                 if (code) {
-                    done(new Error('code:' + code));
+                    console.log('error code: ' + code);
                 } else {
+                    console.log('npm install finished');
                     done();
                 }
             })
@@ -126,16 +135,8 @@ module.exports = generators.extend({
     // 生成器即将结束
     end: function() {
         this.log('end');
-        var done = this.async();
         this.log(yosay(
-                'Your app has been created successfully!'
-            )).on('exit', function(code) {
-                if (code) {
-                    done(new Error('code:' + code));
-                } else {
-                    done();
-                }
-            })
-            .on('error', done);
+            'Your app has been created successfully!'
+        ));
     }
 });
