@@ -801,7 +801,7 @@ $px-only: false; // true for lt IE8
             @else {
                 // 这里的0.1对应计算html的font-size时的0.1
                 // 推导：
-                // 因为 designContentWidth / designWidth = htmlFontSize / deviceWidth * ? rem
+                // 因为 designContentWidth / designWidth = (htmlFontSize * ? rem) / deviceWidth
                 // 其中 htmlFontSize = deviceWidth * 0.1
                 // 所以 ? rem = (designContentWidth / (designWidth * 0.1)) * 1rem
                 $list: append($list, ($px / ($design-width * 0.1)) * 1rem);

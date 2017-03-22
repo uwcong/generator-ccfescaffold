@@ -78,7 +78,7 @@ gulp.task('build-js', function() {
 
 // build-image
 gulp.task('build-image', function() {
-    gulp.src(config.devDir + '/images/**/*.{png, jpg, jpeg, gif, ico, webp, svg}', { base: config.devDir })
+    gulp.src(config.devDir + '/images/**/*.{png,jpg,jpeg,gif,ico,webp,svg}', { base: config.devDir })
         .pipe(imagemin({
             progressive: true
         }))

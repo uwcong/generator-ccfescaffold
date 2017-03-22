@@ -157,10 +157,13 @@ var UtilFn = {
     },
 
     // 生成弹窗
-    addDialogBox: function(content, contentId) {
+    addDialogBox: function(content) {
         this.delDialogBox();
+        var that = this;
         $('body').append('<div class="m_dialog" id="dialogBox"><div class="mask" id="dialogBoxMask"></div>' + content + '</div>');
-        if (contentId) UtilFn.setPopupVerticalMid(contentId);
+        $('#dialogBoxMask').bind('click', function() {
+            that.delDialogBox();
+        });
     },
     // 删除弹窗
     delDialogBox: function() {
