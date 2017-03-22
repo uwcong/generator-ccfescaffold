@@ -62,6 +62,18 @@ var UtilFn = {
     isWeChat: function() {
         return /micromessenger/.test(navigator.userAgent.toLowerCase());
     },
+    isPc: function() {
+        var userAgentInfo = navigator.userAgent.toLowerCase();
+        var agents = ["android", "iphone", "ipad", "ipod", "symbianos", "windows phone"];
+        var flag = true;
+        for (var i = 0; i < agents.length; i++) {
+            if (userAgentInfo.indexOf(agents[i]) > 0) {
+                flag = false;
+                break;
+            }
+        }
+        return flag;
+    },
 
     // jquery.countdown
     countDown: function() {
