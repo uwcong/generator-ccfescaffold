@@ -28,7 +28,7 @@ gulp.task('server', function() {
         open: false
     });
     gulp.watch(config.devDir + '/sass/*.scss', ['compass']);
-    gulp.watch(config.devDir + '/js/*.js', ['concatMain']);
+    gulp.watch(config.devDir + '/js/**/*.js', ['concatMain']);
     gulp.watch(['tmpl/*.html', 'js/**/*.js'], { cwd: config.devDir }, reload); // NOTE: 这里cwd自带了 /，所以要去掉路径前面的 /
 });
 
@@ -51,12 +51,16 @@ gulp.task('build-css', function() {
             var date = new Date();
             path.basename += '_' + date.getTime();
         }))
-        .pipe(gulp.dest(config.buildDir))
+        .pipe(gulp.dest(config.buildDir));
+
+    copy([config.devDir + '/css/lib/**/*.css'], config.buildDir + '/css/lib', function(err, files) {
+        if (err) throw err;
+    });
 });
 
 // concat js
 gulp.task('concatMain', function() {
-    gulp.src([config.devDir + '/js/_utilFn.js', config.devDir + '/js/_config.js', config.devDir + '/js/_main.js'])
+    gulp.src([config.devDir + '/js/module/_utilFn.js', config.devDir + '/js/module/_config.js', config.devDir + '/js/module/_main.js'])
         .pipe(concat('main.js'))
         .pipe(gulp.dest(config.devDir + '/js'))
         .pipe(reload({ stream: true }))
@@ -71,7 +75,7 @@ gulp.task('build-js', function() {
         }))
         .pipe(gulp.dest(config.buildDir));
 
-    copy([config.devDir + '/js/lib/*.js'], config.buildDir + '/js/lib', function(err, files) {
+    copy([config.devDir + '/js/lib/**/*.js'], config.buildDir + '/js/lib', function(err, files) {
         if (err) throw err;
     });
 });
