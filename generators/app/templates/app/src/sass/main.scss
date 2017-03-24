@@ -46,7 +46,7 @@ $design-width: 2001px;
     width: px2rem(1386px);
     // height: px2rem(924px);
     margin: px2rem(-924px/2 0px 0px -1386px/2);
-    background: rgba(126, 255, 255, .15);
+    background: rgba(126, 255, 255, 1);
     border-radius: px2rem(8px);
     &:before,
     &:after {

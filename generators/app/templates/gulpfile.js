@@ -1,7 +1,6 @@
 var gulp = require('gulp');
 var copy = require('copy');
-var browserSync = require('browser-sync');
-var reload = browserSync.reload;
+var connect = require('gulp-connect');
 var compass = require('gulp-compass');
 var plumber = require('gulp-plumber');
 var rename = require('gulp-rename');
@@ -13,23 +12,39 @@ var htmlReplace = require('gulp-html-replace');
 
 // 配置
 var config = {
-    baseDir: './app',
-    devDir: './app/src',
-    buildDir: './app/dest'
+    baseDir: 'app',
+    devDir: 'app/src',
+    buildDir: 'app/dest'
 }
 
 // 开启本地服务器并监听
-gulp.task('server', function() {
-    browserSync({
-        server: {
-            baseDir: config.baseDir
-        },
-        port: '8001',
-        open: false
+gulp.task('DevServer', function() {
+    connect.server({
+        root: config.devDir,
+        host: '192.168.3.2',
+        port: 8000,
+        livereload: true
     });
-    gulp.watch(config.devDir + '/sass/*.scss', ['compass']);
-    gulp.watch(config.devDir + '/js/**/*.js', ['concatMain']);
-    gulp.watch(['tmpl/*.html', 'js/**/*.js'], { cwd: config.devDir }, reload); // NOTE: 这里cwd自带了 /，所以要去掉路径前面的 /
+});
+gulp.task('BuildServer', function() {
+    connect.server({
+        root: config.buildDir,
+        host: '192.168.3.2',
+        port: 8001,
+        livereload: false
+    });
+});
+
+// reload
+gulp.task('reload', function() {
+    gulp.src(config.devDir + '/**/*')
+        .pipe(connect.reload());
+});
+
+// clean （注：npm本身的del会有执行顺序的问题哦，不管del是先执行还是后执行，多运行几次就会报错）
+gulp.task('clean', function() {
+    return gulp.src(config.buildDir + '/*', { read: false })
+        .pipe(clean());
 });
 
 // compass css
@@ -42,14 +57,14 @@ gulp.task('compass', function() {
             image: config.devDir + '/images',
             style: 'compressed',
         }))
-        .pipe(reload({ stream: true }))
+        .pipe(connect.reload());
 });
 // build-css
 gulp.task('build-css', function() {
     gulp.src(config.devDir + '/css/main.css', { base: config.devDir })
         .pipe(rename(function(path) {
             var date = new Date();
-            path.basename += '_' + date.getTime();
+            // path.basename += '_' + date.getTime(); // 模板还是后端控制，所以重命名暂不做
         }))
         .pipe(gulp.dest(config.buildDir));
 
@@ -63,7 +78,7 @@ gulp.task('concatMain', function() {
     gulp.src([config.devDir + '/js/module/_utilFn.js', config.devDir + '/js/module/_config.js', config.devDir + '/js/module/_main.js'])
         .pipe(concat('main.js'))
         .pipe(gulp.dest(config.devDir + '/js'))
-        .pipe(reload({ stream: true }))
+        .pipe(connect.reload());
 });
 // build-js
 gulp.task('build-js', function() {
@@ -71,7 +86,7 @@ gulp.task('build-js', function() {
         .pipe(uglify())
         .pipe(rename(function(path) {
             var date = new Date();
-            path.basename += '_' + date.getTime();
+            // path.basename += '_' + date.getTime(); // 模板还是后端控制，所以重命名暂不做
         }))
         .pipe(gulp.dest(config.buildDir));
 
@@ -96,14 +111,19 @@ gulp.task('build-html', function() {
     });
 });
 
-// clean （注：npm本身的del会有执行顺序的问题哦，不管del是先执行还是后执行，多运行几次就会报错）
-gulp.task('clean', function() {
-    return gulp.src(config.buildDir + '/*', { read: false })
-        .pipe(clean());
+// watch
+gulp.task('watch', function() {
+    gulp.watch(config.devDir + '/sass/*.scss', ['compass']);
+    gulp.watch(config.devDir + '/js/module/*.js', ['concatMain']);
+    gulp.watch(config.devDir + '/**/*', ['reload'])
+        .on('change', function(event) {
+            var changedFilePath = config.devDir + event.path.split(config.devDir)[1];
+            console.log('Changed File: ' + changedFilePath);
+        });
 });
 
 // default
-gulp.task('default', ['server', 'compass', 'concatMain']);
+gulp.task('default', ['DevServer', 'BuildServer', 'compass', 'concatMain', 'watch']);
 
 // build
 gulp.task('build', ['clean'], function() {

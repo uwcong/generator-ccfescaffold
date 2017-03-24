@@ -120,7 +120,10 @@ module.exports = generators.extend({
     install: function() {
         this.log('install');
         var done = this.async();
-        this.spawnCommand('npm', ['install', '-d']) //安装项目依赖
+        // 安装项目依赖
+        //  说明：NPM从3.0.0开始，架包的依赖不再安装在每个架包的node_modules文件夹内，而是安装在顶层的node_modules文件夹中。
+        //  如果要启用之前的风格--每个依赖包的依赖都放在该包内--则可以添加命令参数legacy-bundling
+        this.spawnCommand('npm', ['install', '-d', '--dev', '--legacy-bundling'])
             .on('exit', function(code) {
                 if (code) {
                     console.log('error code: ' + code);
