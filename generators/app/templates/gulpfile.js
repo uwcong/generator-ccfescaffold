@@ -61,7 +61,7 @@ gulp.task('compass', function() {
 });
 // build-css
 gulp.task('build-css', function() {
-    gulp.src(config.devDir + '/css/main.css', { base: config.devDir })
+    gulp.src(config.devDir + '/css/*.css', { base: config.devDir })
         .pipe(rename(function(path) {
             var date = new Date();
             // path.basename += '_' + date.getTime(); // 模板还是后端控制，所以重命名暂不做
@@ -82,7 +82,7 @@ gulp.task('concatMain', function() {
 });
 // build-js
 gulp.task('build-js', function() {
-    gulp.src(config.devDir + '/js/main.js', { base: config.devDir })
+    gulp.src(config.devDir + '/js/*.js', { base: config.devDir })
         .pipe(uglify())
         .pipe(rename(function(path) {
             var date = new Date();
@@ -106,7 +106,7 @@ gulp.task('build-image', function() {
 
 // build-html
 gulp.task('build-html', function() {
-    copy([config.devDir + '/tmpl/**/*'], config.buildDir + '/tmpl', function(err, files) {
+    copy([config.devDir + '/tmpl/**/*.html'], config.buildDir + '/tmpl', function(err, files) {
         if (err) throw err;
     });
 });
