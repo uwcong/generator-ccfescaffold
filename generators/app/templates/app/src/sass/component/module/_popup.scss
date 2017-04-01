@@ -1,0 +1,23 @@
+@charset "UTF-8";
+
+/**
+ * _popup.scss
+ * @author Cc
+ * @date 2016-04-01
+ * @description module级别组件：弹窗及遮罩
+ *
+ */
+
+.m_popup {
+    position: fixed;
+    z-index: 10;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.m_popup .mask {
+    @extend .m_popup;
+    background: rgba(0, 0, 0, .8);
+}

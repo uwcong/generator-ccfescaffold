@@ -2,7 +2,10 @@
  * document ready and window onload
  * 
  */
-$(function() {});
+$(function() {
+
+    UtilFn.addPopup('<div class="w_loading">Loading</div>')
+});
 window.onload = function() {
     // 设置列表宽度
     $('.js_listItem').each(function() {

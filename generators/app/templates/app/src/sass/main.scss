@@ -3,7 +3,7 @@
 /**
  * main.scss
  * @author Cc 
- * @date 2016-12-16
+ * @date 2016-04-01
  *
  */
 
@@ -12,17 +12,13 @@
 
 @import "compass";
 
-/* mixin */
+/* helper */
 
-@import "_mixin";
+@import "helper/helper";
 
-/* reset 重置样式 */
+/* component */
 
-@import "_reset";
-
-/* base 基础样式，一般改这个，看不同项目的需要 */
-
-@import "_base";
+@import "component/component";
 
 /* 设计稿宽度，默认750px，按实际设置，这样下面用到的px2rem方法所需的参数值都是设计稿上量度的px值 */
 
@@ -251,93 +247,5 @@ $design-width: 2001px;
     color: #d9d9d9;
     &:active {
         @include transform(scale(1));
-    }
-}
-
-// 弹层、遮罩、弹窗、加载
-.m_dialog {
-    position: fixed;
-    z-index: 1;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-}
-
-.m_dialog .mask {
-    @extend .m_dialog;
-    background: rgba(0, 0, 0, .8);
-}
-
-// loading
-.w_pageLoading {
-    position: absolute;
-    z-index: 30;
-    width: px2rem(400px);
-    height: px2rem(400px);
-    top: 50%;
-    left: 50%;
-    margin: px2rem(-200px 0px 0px -200px);
-    box-sizing: border-box;
-    line-height: px2rem(400px);
-    text-align: center;
-    color: #fff;
-    font-size: px2rem(44px);
-}
-
-.w_pageLoading:before,
-.w_pageLoading:after {
-    opacity: 0;
-    box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-    content: "\0020";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    border-radius: px2rem(400px);
-    border: px2rem(10px) solid #fff;
-    box-shadow: 0 0 px2rem(100px) #fff, inset 0 0 px2rem(100px) #fff;
-    -webkit-box-shadow: 0 0 px2rem(100px) #fff, inset 0 0 px2rem(100px) #fff;
-}
-
-.w_pageLoading:after {
-    z-index: 1;
-    animation: cssload 2.3s infinite 1.15s;
-    -webkit-animation: cssload 2.3s infinite 1.15s;
-}
-
-.w_pageLoading:before {
-    z-index: 2;
-    animation: cssload 2.3s infinite;
-    -webkit-animation: cssload 2.3s infinite;
-}
-
-@keyframes cssload {
-    0% {
-        transform: scale(0);
-        opacity: 0;
-    }
-    50% {
-        opacity: 1;
-    }
-    100% {
-        transform: scale(1);
-        opacity: 0;
-    }
-}
-
-@-webkit-keyframes cssload {
-    0% {
-        -webkit-transform: scale(0);
-        opacity: 0;
-    }
-    50% {
-        opacity: 1;
-    }
-    100% {
-        -webkit-transform: scale(1);
-        opacity: 0;
     }
 }

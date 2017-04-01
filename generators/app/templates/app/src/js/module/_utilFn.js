@@ -169,16 +169,16 @@ var UtilFn = {
     },
 
     // 生成弹窗
-    addDialogBox: function(content) {
-        this.delDialogBox();
+    addPopup: function(content) {
+        this.delPopup();
         var that = this;
-        $('body').append('<div class="m_dialog" id="dialogBox"><div class="mask" id="dialogBoxMask"></div>' + content + '</div>');
-        $('#dialogBoxMask').bind('click', function() {
-            that.delDialogBox();
+        $('body').append('<div class="m_popup" id="popup"><div class="mask" id="popupMask"></div>' + content + '</div>');
+        $('#popupMask').bind('click', function() {
+            that.delPopup();
         });
     },
     // 删除弹窗
-    delDialogBox: function() {
-        $('#dialogBox').remove();
+    delPopup: function() {
+        $('#popup').remove();
     },
 }

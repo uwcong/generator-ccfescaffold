@@ -21,7 +21,7 @@ var config = {
 gulp.task('DevServer', function() {
     connect.server({
         root: config.devDir,
-        host: '192.168.3.2',
+        host: '192.168.3.5',
         port: 8000,
         livereload: true
     });
@@ -29,7 +29,7 @@ gulp.task('DevServer', function() {
 gulp.task('BuildServer', function() {
     connect.server({
         root: config.buildDir,
-        host: '192.168.3.2',
+        host: '192.168.3.5',
         port: 8001,
         livereload: false
     });
