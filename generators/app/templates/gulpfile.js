@@ -113,7 +113,7 @@ gulp.task('build-html', function() {
 
 // watch
 gulp.task('watch', function() {
-    gulp.watch(config.devDir + '/sass/*.scss', ['compass']);
+    gulp.watch(config.devDir + '/sass/**/*.scss', ['compass']);
     gulp.watch(config.devDir + '/js/module/*.js', ['concatMain']);
     gulp.watch(config.devDir + '/**/*', ['reload'])
         .on('change', function(event) {
