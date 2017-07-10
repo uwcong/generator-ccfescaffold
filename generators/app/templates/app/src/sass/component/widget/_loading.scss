@@ -11,69 +11,63 @@
 .w_loading {
     position: absolute;
     z-index: 20;
-    width: px2rem(300px);
-    height: px2rem(300px);
-    top: 50%;
+    width: px2rem(250px);
+    top: 40%;
     left: 50%;
-    margin: px2rem(-150px 0px 0px -150px);
+    margin-left: px2rem(-125px);
+    padding: px2rem(20px 0px 30px);
+    background: rgba(0,0,0,.5);
     box-sizing: border-box;
-    line-height: px2rem(300px);
+    border-radius: px2rem(10px);
+    overflow: hidden;
     text-align: center;
     color: #fff;
-    font-size: px2rem(44px);
-}
-
-.w_loading:before,
-.w_loading:after {
-    opacity: 0;
-    box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-    content: "\0020";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    border-radius: px2rem(300px);
-    border: px2rem(10px) solid #fff;
-    box-shadow: 0 0 px2rem(100px) #fff, inset 0 0 px2rem(100px) #fff;
-    -webkit-box-shadow: 0 0 px2rem(100px) #fff, inset 0 0 px2rem(100px) #fff;
-}
-
-.w_loading:after {
-    z-index: 1;
-    @include animation(loading 2.3s infinite 1.15s);
-}
-
-.w_loading:before {
-    z-index: 2;
-    @include animation(loading 2.3s infinite);
+    &:before {
+        content: '';
+        display: block;
+        margin: px2rem(10px) auto px2rem(15px);
+        width: 41px;
+        height: 41px;
+        background: inline-image("../images/icon_loading_2x.png") no-repeat;
+        background-size: contain;
+        @extend %gpu_accelerate;
+        @include animation(loading .8s linear infinite);
+    }
 }
 
 @keyframes loading {
     0% {
-        transform: scale(0);
-        opacity: 0;
+        transform: rotate(0deg);
+    }
+    25% {
+        transform: rotate(90deg);
     }
     50% {
-        opacity: 1;
+        transform: rotate(180deg);
+    }
+    75% {
+        transform: rotate(270deg);
     }
     100% {
-        transform: scale(1);
-        opacity: 0;
+        transform: rotate(360deg);
     }
 }
 
 @-webkit-keyframes loading {
     0% {
-        -webkit-transform: scale(0);
-        opacity: 0;
+        -webkit-transform: rotate(0deg);
+    }
+    25% {
+        -webkit-transform: rotate(90deg);
     }
     50% {
-        opacity: 1;
+        -webkit-transform: rotate(180deg);
+    }
+    75% {
+        -webkit-transform: rotate(270deg);
     }
     100% {
-        -webkit-transform: scale(1);
-        opacity: 0;
+        -webkit-transform: rotate(360deg);
     }
 }
+

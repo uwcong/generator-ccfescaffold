@@ -1,0 +1,163 @@
+@charset "UTF-8";
+
+/**
+ * _icon.scss
+ * @author Cc
+ * @date 2016-04-01
+ * @description widget级别组件：图标
+ *
+ */
+
+// icon
+.w_icon {
+    display: inline-block;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.w_icon_Back {
+    width: px2rem(22px);
+    height: px2rem(40px);
+    background-size: px2rem(22px 40px);
+    background-image: inline-image("../images/icon_back_2x.png");
+}
+
+.w_icon_FbBindSucc {
+    width: px2rem(227px);
+    height: px2rem(191px);
+    background-image: inline-image("../images/icon_fbBound_2x.png");
+}
+
+.w_icon_EmBindSucc {
+    width: px2rem(189px);
+    height: px2rem(138px);
+    background-image: inline-image("../images/icon_emBound_2x.png");
+}
+
+.w_icon_EmVerifying {
+    width: px2rem(204px);
+    height: px2rem(161px);
+    background-image: inline-image("../images/icon_emVerifying_2x.png");
+}
+
+.w_icon_EmVerified {
+    width: px2rem(217px);
+    height: px2rem(165px);
+    background-image: inline-image("../images/icon_emVerified_2x.png");
+}
+
+.w_icon_PhBindSucc {
+    width: px2rem(208px);
+    height: px2rem(283px);
+    background-image: inline-image("../images/icon_phBound_2x.png");
+}
+
+.w_icon_pswFindSucc {
+    width: px2rem(205px);
+    height: px2rem(183px);
+    background-image: inline-image("../images/icon_pswModified_2x.png");
+}
+
+.w_icon_Goto {
+    width: px2rem(16px);
+    height: px2rem(28px);
+    background-image: inline-image("../images/icon_goto_2x.png");
+}
+
+.w_icon_SwitchOn,
+.w_icon_SwitchOff {
+    width: px2rem(100px);
+    height: px2rem(54px);
+}
+
+.w_icon_SwitchOn {
+    background-image: inline-image("../images/icon_switchOn_2x.png");
+}
+
+.w_icon_SwitchOff {
+    background-image: inline-image("../images/icon_switchOff_2x.png");
+}
+
+.w_icon_EyeOpen,
+.w_icon_EyeClose {
+    width: px2rem(44px);
+    height: px2rem(40px);
+}
+.w_icon_EyeOpen {
+    background-image: inline-image("../images/icon_eyeOpen_2x.png");
+}
+.w_icon_EyeClose {
+    background-image: inline-image("../images/icon_eyeClose_2x.png");
+}
+
+.w_icon_InputDel {
+    width: px2rem(25px);
+    height: px2rem(25px);
+    background-image: inline-image("../images/icon_inputDel_2x.png");
+}
+
+.w_icon_Invite30,
+.w_icon_Invite50 {
+    width: px2rem(76px);
+    height: px2rem(38px);
+}
+.w_icon_Invite30 {
+    background-image: inline-image("../images/pic_invite_30.png"); 
+}
+.w_icon_Invite50 {
+    background-image: inline-image("../images/pic_invite_50.png"); 
+}
+
+.w_icon_Account,
+.w_icon_Point,
+.w_icon_Safe,
+.w_icon_ChangePsw,
+.w_icon_ResetPsw,
+.w_icon_Recharge,
+.w_icon_Setting,
+.w_icon_PointList,
+.w_icon_PointHelp,
+.w_icon_Loading {
+    width: px2rem(40px);
+    height: px2rem(40px);
+}
+
+.w_icon_Account {
+    background-image: inline-image("../images/icon_account_2x.png");
+}
+
+.w_icon_Point {
+    background-image: inline-image("../images/icon_point_2x.png");
+}
+
+.w_icon_Safe {
+    background-image: inline-image("../images/icon_safe_2x.png");
+}
+
+.w_icon_ChangePsw {
+    background-image: inline-image("../images/icon_changePsw_2x.png");
+}
+
+.w_icon_ResetPsw {
+    background-image: inline-image("../images/icon_resetPsw_2x.png");
+}
+
+.w_icon_Recharge {
+    background-image: inline-image("../images/icon_recharge_2x.png");
+}
+
+.w_icon_Setting {
+    background-image: inline-image("../images/icon_setting_2x.png");
+}
+
+.w_icon_PointList {
+    background-image: inline-image("../images/icon_pointDetail.png");
+}
+
+.w_icon_PointHelp {
+    background-image: inline-image("../images/icon_help.png");
+}
+
+.w_icon_Loading {
+    background-image: inline-image("../images/icon_loading.png");
+}

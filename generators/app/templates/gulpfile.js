@@ -9,6 +9,7 @@ var uglify = require('gulp-uglify');
 var imagemin = require('gulp-imagemin');
 var clean = require('gulp-clean');
 var htmlReplace = require('gulp-html-replace');
+var stripDebug = require('gulp-strip-debug');
 
 // 配置
 var config = {
@@ -21,7 +22,7 @@ var config = {
 gulp.task('DevServer', function() {
     connect.server({
         root: config.devDir,
-        host: '192.168.3.5',
+        host: 'localhost',
         port: 8000,
         livereload: true
     });
@@ -29,7 +30,7 @@ gulp.task('DevServer', function() {
 gulp.task('BuildServer', function() {
     connect.server({
         root: config.buildDir,
-        host: '192.168.3.5',
+        host: 'localhost',
         port: 8001,
         livereload: false
     });
@@ -83,6 +84,7 @@ gulp.task('concatMain', function() {
 // build-js
 gulp.task('build-js', function() {
     gulp.src(config.devDir + '/js/*.js', { base: config.devDir })
+        .pipe(stripDebug())
         .pipe(uglify())
         .pipe(rename(function(path) {
             var date = new Date();
@@ -90,9 +92,9 @@ gulp.task('build-js', function() {
         }))
         .pipe(gulp.dest(config.buildDir));
 
-    copy([config.devDir + '/js/lib/**/*.js'], config.buildDir + '/js/lib', function(err, files) {
-        if (err) throw err;
-    });
+    // copy([config.devDir + '/js/lib/**/*.js'], config.buildDir + '/js/lib', function(err, files) {
+    //     if (err) throw err;
+    // });
 });
 
 // build-image
@@ -118,7 +120,7 @@ gulp.task('watch', function() {
     gulp.watch(config.devDir + '/**/*', ['reload'])
         .on('change', function(event) {
             var changedFilePath = config.devDir + event.path.split(config.devDir)[1];
-            console.log('Changed File: ' + changedFilePath);
+            console.log('Changed File: ' + event.path);
         });
 });
 

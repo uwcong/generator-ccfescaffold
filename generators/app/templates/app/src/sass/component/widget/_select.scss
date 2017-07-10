@@ -1,0 +1,49 @@
+@charset "UTF-8";
+
+/**
+ * _select.scss
+ * @author Cc
+ * @date 2016-04-01
+ * @description widget级别组件：下拉框
+ *
+ */
+
+.w_select {
+    position: relative;
+    padding-top: px2rem(30px);
+    border-bottom: 1px solid #bbb;
+    &:before {
+        content: '';
+        position: absolute;
+        bottom: px2rem(20px);
+        right: px2rem(20px);
+        @include triangle(px2rem(20px), px2rem(14px), bottom, $themeColor);
+    }
+
+    select {
+        @include box_sizing(border-box);
+        width: 100%;
+        padding: px2rem(16px 0px);
+        background: #fefbf6;
+        line-height: px2rem(40px);
+        font-size: px2rem(32px);
+        border: 0;
+        -webkit-appearance: none;
+        &:active {
+            background: $clickActiveBackground;
+        }
+    }
+
+    label {
+        position: absolute;
+        pointer-events: none;
+        top: 0;
+        left: 0;
+        line-height: px2rem(30px);
+        font-size: px2rem(25px);
+        color: #999;
+        transition: 0.2s ease all;
+        -moz-transition: 0.2s ease all;
+        -webkit-transition: 0.2s ease all;
+    }
+}

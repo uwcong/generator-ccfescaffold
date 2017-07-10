@@ -1,0 +1,110 @@
+@charset "UTF-8";
+
+/**
+ * _input.scss
+ * @author Cc
+ * @date 2016-04-01
+ * @description widget级别组件：输入框
+ *
+ */
+
+$inputActionSpace: 68px;
+
+.w_input {
+    position: relative;
+    padding-top: px2rem(30px);
+    border-bottom: 1px solid #bbb;
+
+    input {
+        @include box_sizing(border-box);
+        width: 100%;
+        padding: px2rem(16px 0px);
+        background: #fefbf6;
+        line-height: px2rem(30px);
+        &:active {
+            background: $clickActiveBackground;
+        }
+        &[readonly] {
+            &:active {
+                background: transparent;
+            }
+        }
+    }
+
+    label {
+        position: absolute;
+        pointer-events: none;
+        top: px2rem(50px);
+        left: 0;
+        line-height: px2rem(30px);
+        color: #999;
+        transition: 0.2s ease all;
+        -moz-transition: 0.2s ease all;
+        -webkit-transition: 0.2s ease all;
+    }
+    
+    &_Active,
+    &_Warn,
+    &_Valid {
+        label {
+            top: 0;
+            left: 0;
+            font-size: px2rem(25px);
+        }
+    }
+
+    &_Active {
+        border-color: $themeColor;
+        label {
+            color: $themeColor;
+        }
+    }
+
+    &_Warn {
+        border-color: red;
+        label {
+            color: red;
+        }
+    }
+
+    &_Valid {
+        border-color: #bbb;
+        label {
+            color: #999;
+        }
+    }
+
+    .w_icon_EyeOpen,
+    .w_icon_EyeClose,
+    .w_icon_InputDel {
+        position: absolute;
+        width: px2rem($inputActionSpace);
+        height: px2rem($inputActionSpace);
+        background-position: center;
+        bottom: 0;
+        right: 0;
+        &:active {
+            background-color: $clickActiveBackground;
+        }
+    }
+
+    .w_icon_EyeOpen,
+    .w_icon_EyeClose {
+        background-size: px2rem(44px 40px);
+    }
+
+    .w_icon_InputDel {
+        background-size: px2rem(25px 25px);
+    }
+}
+
+.w_input_Psw {
+    padding-right: px2rem($inputActionSpace);
+    .w_icon_InputDel {
+        right: px2rem($inputActionSpace);
+    }
+}
+
+.w_input_Readonly {
+    border-color: transparent;
+}

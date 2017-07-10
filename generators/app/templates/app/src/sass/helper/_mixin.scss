@@ -37,8 +37,10 @@
  * skew
  * translate
  * rotate
+ * backface
  * perspective
  * origin
+ * openGPU
  *
  * --- transition ---
  * transition
@@ -478,10 +480,16 @@ $prefix-for-spec: true !default; // 标准版
 }
 
 
+/* backface */
+
+@mixin backface($backface) {
+    @include prefixer(backface-visibility, $backface, webkit moz ms spec);
+}
+
 /* perspective */
 
 @mixin perspective($perspective) {
-    @include prefixer(perspective, $perspective, webkit moz spec);
+    @include prefixer(perspective, $perspective, webkit moz ms spec);
 }
 
 
@@ -493,6 +501,13 @@ $prefix-for-spec: true !default; // 标准版
 
 @mixin transform-origin($origin) {
     @include prefixer(transform-origin, $origin, webkit moz ms spec);
+}
+
+/* gpu_accelerate */
+%gpu_accelerate {
+    @include backface(hidden);
+    @include perspective(1000);
+    @include transform(translate3d(0, 0, 0));
 }
 
 

@@ -1,0 +1,59 @@
+@charset "UTF-8";
+
+/**
+ * _dialog.scss
+ * @author Cc
+ * @date 2016-04-01
+ * @description module级别组件：弹窗
+ *
+ */
+
+.m_dialog {
+    position: absolute;
+    z-index: 30;
+    left: 50%;
+    width: px2rem(550px);
+    margin-left: px2rem(-275px);
+    background: #fff;
+    border-radius: px2rem(20px);
+    .hd {
+        padding-top: px2rem(35px);
+        text-align: center;
+        .title {
+            font-size: px2rem(36px);
+        }
+    }
+    .bd{
+        padding: px2rem(35px 40px);
+        word-break: break-word;
+        text-align: center;
+        color: #666;
+    }
+    .ft {
+        @extend %clear;
+        overflow: hidden;
+        border-radius: px2rem(0px 0px 20px 20px);
+        border-top: 1px solid #999;
+        a {
+            float: left;
+            width: 100%;
+            line-height: px2rem(90px);
+            text-align: center;
+            font-size: px2rem(40px);
+            color: $themeColor;
+            &:active {
+                background: #eee;
+            }
+        }
+    }
+    .ft_Double {
+        a {
+            @include box_sizing(border-box);
+            border-right: 1px solid #999;
+            width: 50%;
+            &:last-child {
+                border: 0;
+            }
+        }
+    }
+}
