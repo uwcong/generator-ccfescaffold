@@ -11,6 +11,12 @@ var clean = require('gulp-clean');
 var htmlReplace = require('gulp-html-replace');
 var stripDebug = require('gulp-strip-debug');
 
+var browserify  = require('browserify');
+var babelify    = require('babelify');
+var source      = require('vinyl-source-stream');
+var buffer      = require('vinyl-buffer');
+// var sourcemaps  = require('gulp-sourcemaps');
+
 // 配置
 var config = {
     baseDir: 'app',
@@ -60,6 +66,34 @@ gulp.task('compass', function() {
         }))
         .pipe(connect.reload());
 });
+
+// concat js
+gulp.task('concatMain', function() {
+    gulp.src([config.devDir + '/js/module/_utilFn.js', config.devDir + '/js/module/_config.js', config.devDir + '/js/module/_main.js'])
+        .pipe(concat('main.js'))
+        .pipe(gulp.dest(config.devDir + '/js'))
+        .pipe(connect.reload());
+});
+
+// es6
+gulp.task('es6', function() {
+    return browserify({
+        entries: config.devDir + '/js/module/_main.js',
+        debug: true
+    })
+    .transform('babelify', {
+        presets: ['es2015']
+    })
+    .bundle()
+    .pipe(source('main.js'))
+    // .pipe(buffer())
+    // .pipe(sourcemaps.init())
+    // .pipe(uglify())
+    // .pipe(sourcemaps.write('./maps', {addComment: false}))
+    .pipe(gulp.dest(config.devDir + '/js'))
+    .pipe(connect.reload());
+});
+
 // build-css
 gulp.task('build-css', function() {
     gulp.src(config.devDir + '/css/*.css', { base: config.devDir })
@@ -74,13 +108,6 @@ gulp.task('build-css', function() {
     });
 });
 
-// concat js
-gulp.task('concatMain', function() {
-    gulp.src([config.devDir + '/js/module/_utilFn.js', config.devDir + '/js/module/_config.js', config.devDir + '/js/module/_main.js'])
-        .pipe(concat('main.js'))
-        .pipe(gulp.dest(config.devDir + '/js'))
-        .pipe(connect.reload());
-});
 // build-js
 gulp.task('build-js', function() {
     gulp.src(config.devDir + '/js/*.js', { base: config.devDir })
@@ -116,7 +143,8 @@ gulp.task('build-html', function() {
 // watch
 gulp.task('watch', function() {
     gulp.watch(config.devDir + '/sass/**/*.scss', ['compass']);
-    gulp.watch(config.devDir + '/js/module/*.js', ['concatMain']);
+    // gulp.watch(config.devDir + '/js/module/*.js', ['concatMain']);
+    gulp.watch(config.devDir + '/js/module/*.js', ['es6']);
     gulp.watch(config.devDir + '/**/*', ['reload'])
         .on('change', function(event) {
             var changedFilePath = config.devDir + event.path.split(config.devDir)[1];
@@ -125,7 +153,7 @@ gulp.task('watch', function() {
 });
 
 // default
-gulp.task('default', ['DevServer', 'BuildServer', 'compass', 'concatMain', 'watch']);
+gulp.task('default', ['DevServer', 'BuildServer', 'compass', 'es6', 'watch']);
 
 // build
 gulp.task('build', ['clean'], function() {

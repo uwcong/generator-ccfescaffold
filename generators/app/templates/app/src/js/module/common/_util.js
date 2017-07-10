@@ -3,7 +3,8 @@
  * @author Cc
  * 
  */
-var UtilFn = {
+
+let UtilFn = {
     // 动态设置html的font-size，用于rem的计算
     setHtmlFontSize: function (doc, win) {
         var docEl = doc.documentElement,
@@ -261,3 +262,5 @@ var UtilFn = {
         }, 1000);
     },
 }
+
+export {UtilFn};
