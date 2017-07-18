@@ -18,9 +18,9 @@ button {
 body {
     height: auto;
     min-height: 100%;
-    background: #fefbf6;
+    background: #fff;
     font-size: px2rem(32px);
-    color: #333;
+    color: #000;
     -webkit-tap-highlight-color: transparent; // keyNote：该属性可继承，可以去掉button标签、textarea标签、标签绑定javascript事件等点击触发的高亮表现。a标签除外
 }
 

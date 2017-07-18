@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="format-detection" content="telephone=no" />
+    <title>Rebate</title>
+    <link rel="shortcut icon" type="image/x-icon" href="https://rebate.130qq.com/static/images/favicon.ico">
+    <link href="../css/main.css" rel="stylesheet">
+    <script src="../js/lib/jquery.min.js"></script>
+    <script>
+        (function() {
+            var docEl = document.documentElement,
+                resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+                recalc = function() {
+                    var clientWidth = docEl.clientWidth;
+                    if (!clientWidth) return;
+                    docEl.style.fontSize = (clientWidth * 0.1) + 'px';
+                };
+            recalc();
+            window.addEventListener(resizeEvt, recalc, false);
+        })();
+    </script>
+    <style>
+        .block {
+            position: relative;
+            margin: 30px 10px;
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+        .block h1 {
+            position: absolute;
+            top: -.4rem;
+            left: 0;
+            font-size: inherit;
+        }
+        .block_ButtonList .w_button {
+            margin: 0 5px 0 0;
+            width: 30%;
+        }
+    </style>
+</head>
+
+<body ontouchstart="">
+    <section class="block block_ButtonList">
+        <h1>BUTTON</h1>
+        <span class="w_button">Button</span>
+        <span class="w_button w_button_Hollow">Button</span>
+        <span class="w_button w_button_Disabled">Button</span>
+    </section>
+
+    <section class="block">
+        <h1>ICON</h1>
+        <span class="w_icon w_icon_Account"></span>
+        <span class="w_icon w_icon_Point"></span>
+        <span class="w_icon w_icon_Safe"></span>
+        <span class="w_icon w_icon_ChangePsw"></span>
+        <span class="w_icon w_icon_ResetPsw"></span>
+        <span class="w_icon w_icon_Recharge"></span>
+        <span class="w_icon w_icon_Setting"></span>
+    </section>
+
+    <section class="block">
+        <h1>FORM</h1>
+        <section class="m_formGroup">
+            <tag-input id="inputEm" type="text" value="" label="Label"></tag-input>
+        </section>
+        <section class="m_formGroup m_formGroup_Horizontal">
+            <span class="w_button js_button w_button_Hollow" id="sendVCode2Email">Button</span>
+            <tag-input id="inputEmCd" type="text" value="" label="Label"></tag-input>
+        </section>
+        <section class="m_formGroup js_pwGroup">
+            <tag-input id="inputEmPw" type="password" value="" label="Label"></tag-input>
+        </section>
+        <section class="m_action">
+            <span class="w_button js_button" id="bindEm">Submit</span>
+        </section>
+    </section>
+
+    <section class="block">
+        <h1>TIP</h1>
+        <span class="w_button" id="triggerTip">Click to get the tip</span>
+    </section>
+
+    <section class="block">
+        <h1>DIALOG</h1>
+        <span class="w_button" id="triggerDialog">Click to get the dialog</span>
+    </section>
+
+    <script src="../js/lib/fastclick.min.js"></script>
+    <script src="../js/demo.js"></script>
+</body>
+
+</html>

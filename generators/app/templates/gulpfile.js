@@ -75,17 +75,17 @@ gulp.task('concatMain', function() {
         .pipe(connect.reload());
 });
 
-// es6
-gulp.task('es6', function() {
+// es6demo
+gulp.task('es6demo', function() {
     return browserify({
-        entries: config.devDir + '/js/module/_main.js',
+        entries: config.devDir + '/js/module/_demo.js',
         debug: true
     })
     .transform('babelify', {
         presets: ['es2015']
     })
     .bundle()
-    .pipe(source('main.js'))
+    .pipe(source('demo.js'))
     // .pipe(buffer())
     // .pipe(sourcemaps.init())
     // .pipe(uglify())
@@ -144,7 +144,7 @@ gulp.task('build-html', function() {
 gulp.task('watch', function() {
     gulp.watch(config.devDir + '/sass/**/*.scss', ['compass']);
     // gulp.watch(config.devDir + '/js/module/*.js', ['concatMain']);
-    gulp.watch(config.devDir + '/js/module/*.js', ['es6']);
+    gulp.watch(config.devDir + '/js/module/**/*.js', ['es6demo']);
     gulp.watch(config.devDir + '/**/*', ['reload'])
         .on('change', function(event) {
             var changedFilePath = config.devDir + event.path.split(config.devDir)[1];
@@ -153,7 +153,7 @@ gulp.task('watch', function() {
 });
 
 // default
-gulp.task('default', ['DevServer', 'BuildServer', 'compass', 'es6', 'watch']);
+gulp.task('default', ['DevServer', 'BuildServer', 'compass', 'es6demo', 'watch']);
 
 // build
 gulp.task('build', ['clean'], function() {

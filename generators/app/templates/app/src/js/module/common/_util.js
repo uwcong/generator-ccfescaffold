@@ -135,17 +135,30 @@ let UtilFn = {
         this.setCookie(name, "", -1);
     },
 
+    // 获取特定localstorage
+    getLocalStorage: function (key, callback) {
+        let data = window.localStorage.getItem(key);
+        if (data) {
+            callback(data);
+        } else {
+            data = null;
+        }
+    },
+
     // 去掉结尾空格
     removeLastBlank: function (value) {
         return value.replace(/(\s*$)/g, "");
     },
 
+
+
     // 设置弹窗垂直居中
     setPopupVerticalMid: function (domObj) {
         if ($(domObj)) {
-            var popupHeight = $(domObj).height();
+            var popupHeight = $(domObj).height(),
+                winHeight = $(window).height();
             $(domObj).css({
-                'top': (GlobalConfig.viewHeight - popupHeight) / 2,
+                'top': (winHeight - popupHeight) / 2,
             })
         } else {
             alert("Popup is not exist！");
@@ -194,12 +207,12 @@ let UtilFn = {
      */
     setDialog: function (oDialogParams) {
         var that = this;
-        var title = oDialogParams.title ? oDialogParams.title : $('#dialogTitle').text(),
+        var title = oDialogParams.title ? oDialogParams.title : 'Title',
             content = oDialogParams.content,
-            actionText = oDialogParams.actionText ? oDialogParams.actionText : $('#dialogActionSubmit').text(),
-            leftActionText = oDialogParams.leftActionText ? oDialogParams.leftActionText : $('#dialogActionCancel').text(),
-            leftActionStyle = oDialogParams.leftActionStyle ? ' style="' + oDialogParams.leftActionStyle + '"' : '';
-            rightActionText = oDialogParams.rightActionText ? oDialogParams.rightActionText : actionText;
+            actionText = oDialogParams.actionText ? oDialogParams.actionText : 'Get it',
+            leftActionText = oDialogParams.leftActionText ? oDialogParams.leftActionText : 'Cancel',
+            leftActionStyle = oDialogParams.leftActionStyle ? ' style="' + oDialogParams.leftActionStyle + '"' : '',
+            rightActionText = oDialogParams.rightActionText ? oDialogParams.rightActionText : 'Confirm',
             rightActionStyle = oDialogParams.rightActionStyle ? ' style="' + oDialogParams.rightActionStyle + '"' : '';
 
         var ActionTmpl;
@@ -254,13 +267,59 @@ let UtilFn = {
         });
     },
 
+    // 设置input框
+    setInput: function (target) {
+        let attrObj = {
+            id: $(target).attr('id'),
+            type: $(target).attr('type'),
+            value: $(target).attr('value'),
+            label: $(target).attr('label')
+        };
+        let customTmpl = '';
+        if (attrObj.type === 'password') customTmpl = '<span class="w_icon w_icon_EyeClose js_pswToggle"></span>';
+        let tmpl = '<div class="w_input' + (attrObj.type === 'password' ? ' w_input_Psw' : '') + '">\
+                        <input type=' + attrObj.type + ' value="' + attrObj.value + '" id=' + attrObj.id + ' />\
+                        <label>' + attrObj.label + '</label>\
+                        ' + customTmpl + '\
+                    </div>';
+        $(target).after(tmpl).remove();
+
+        // handler
+        $('#' + attrObj.id).bind('focus', function() {
+            let $parent = $(this).parent();
+            $parent.removeClass('w_input_Warn w_input_Valid').addClass('w_input_Active');
+        }).bind('blur', function() {
+            let $parent = $(this).parent();
+            $parent.removeClass('w_input_Active');
+        }).bind('keyup', function() {
+            let $parent = $(this).parent(),
+                $del = $parent.children('.js_inputDel');
+            if ($del) {
+                $del.remove();
+                if (!$(this).val()) return;
+            }
+            
+            let that = this,
+                delTemp = '<span class="w_icon w_icon_InputDel js_inputDel"></span>';
+            $parent.append(delTemp);
+            $del = $parent.children('.js_inputDel');
+            $del.bind('click', function () {
+                $(this).remove();
+                $('.js_tip').remove();
+                $(that).val('');
+                that.focus();
+            });
+        });
+    },
+
     // 提示
-    setTip: function (sTip) {
+    setTip: function (sTip, oParams) {
         $('body').append('<span class="w_tip js_tip"><span class="text">' + sTip + '</span></span>');
         setTimeout(function () {
             $('.js_tip').remove();
-        }, 1000);
-    },
+            if (oParams && oParams.callback) oParams.callback();
+        }, (oParams && oParams.msec ? oParams.msec : 1000));
+    }, 
 }
 
 export {UtilFn};

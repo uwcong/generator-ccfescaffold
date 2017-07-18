@@ -26,23 +26,12 @@
     }
 }
 
-.w_button_Disabled {
-    display: none;
-    background: transparent;
-    border-color: #ccc;
-    color: #ccc;
-    &:active {
-        @include transform(scale(1));
-    }
-}
-
 .w_button_Hollow {
     background: transparent;
     color: $themeColor;
 }
 
-.w_button_HollowDisable {
-    display: none;
+.w_button_Disabled {
     background: transparent;
     border-color: #ccc;
     color: #ccc;
