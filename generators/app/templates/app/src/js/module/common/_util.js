@@ -7,10 +7,10 @@
 let UtilFn = {
     // 动态设置html的font-size，用于rem的计算
     setHtmlFontSize: function (doc, win) {
-        var docEl = doc.documentElement,
+        let docEl = doc.documentElement,
             resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
             recalc = function () {
-                var clientWidth = docEl.clientWidth;
+                let clientWidth = docEl.clientWidth;
                 if (!clientWidth) return;
                 docEl.style.fontSize = (clientWidth * 0.1) + 'px';
             };
@@ -23,20 +23,15 @@ let UtilFn = {
 
     // 获取location search参数，返回一个search对象
     getLocationSearchObj: function (qstring) {
-        var splitUrl = qstring.split("?");
-        var strUrl = (splitUrl.length > 1) ? decodeURIComponent(splitUrl[1]).split("&") : [];
-        var str = "";
-        var obj = {};
-        for (var i = 0, l = strUrl.length; i < l; i++) {
+        let splitUrl = qstring.split("?");
+        let strUrl = (splitUrl.length > 1) ? decodeURIComponent(splitUrl[1]).split("&") : [];
+        let str = "";
+        let obj = {};
+        for (let i = 0, l = strUrl.length; i < l; i++) {
             str = strUrl[i].split("=");
             obj[str[0]] = str[1];
         }
         return Array.prototype.sort.call(obj);
-    },
-
-    // 判断邮箱正则
-    isEmail: function (str) {
-        return /^([a-zA-Z0-9\._-])+@([a-zA-Z0-9_-])+((\.[a-zA-Z0-9_-]+)+)$/.test(str);
     },
 
     // 判断环境
@@ -50,10 +45,10 @@ let UtilFn = {
         return /micromessenger/.test(navigator.userAgent.toLowerCase());
     },
     isPc: function () {
-        var userAgentInfo = navigator.userAgent.toLowerCase();
-        var agents = ["android", "iphone", "ipad", "ipod", "symbianos", "windows phone"];
-        var flag = true;
-        for (var i = 0; i < agents.length; i++) {
+        let userAgentInfo = navigator.userAgent.toLowerCase();
+        let agents = ["android", "iphone", "ipad", "ipod", "symbianos", "windows phone"];
+        let flag = true;
+        for (let i = 0; i < agents.length; i++) {
             if (userAgentInfo.indexOf(agents[i]) > 0) {
                 flag = false;
                 break;
@@ -62,14 +57,19 @@ let UtilFn = {
         return flag;
     },
 
-    // 密码格式验证: 7-20位数字或者字母
-    isPasswordValid: function (str) {
-        return /^[a-zA-Z0-9]{7,20}$/.test(str);
+    // 邮箱格式验证
+    isEmail: function (str) {
+        return /^([a-zA-Z0-9\._-])+@([a-zA-Z0-9_-])+((\.[a-zA-Z0-9_-]+)+)$/.test(str);
     },
 
     // 手机格式验证: 不少于7位数字
     isPhoneValid: function (str) {
         return /^[0-9]{7,}$/.test(str);
+    },
+
+    // 密码格式验证: 7-20位数字或者字母
+    isPasswordValid: function (str) {
+        return /^[a-zA-Z0-9]{7,20}$/.test(str);
     },
 
     // 时间戳转换格式
@@ -78,11 +78,11 @@ let UtilFn = {
             s = Number(s);
         }
         fmt = fmt || "yyyy-MM-dd hh:mm:ss";
-        var date = new Date(s);
+        let date = new Date(s);
         if (typeof s == "object") {
             date = s;
         }
-        var o = {
+        let o = {
             "M+": date.getMonth() + 1, //月份
             "d+": date.getDate(), //日
             "h+": date.getHours(), //小时
@@ -92,7 +92,7 @@ let UtilFn = {
             "S": date.getMilliseconds() //毫秒
         };
         if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (date.getFullYear() + "").substr(4 - RegExp.$1.length));
-        for (var k in o) {
+        for (let k in o) {
             if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
         }
         return fmt;
@@ -101,10 +101,10 @@ let UtilFn = {
     // 设置cookie
     setCookie: function (name, value, days) {
         days = days || 0;
-        var expires = "";
+        let expires = "";
         if (days != 0) { //设置cookie过期时间  
-            var date = new Date();
-            var ms = days * 24 * 60 * 60 * 1000;
+            let date = new Date();
+            let ms = days * 24 * 60 * 60 * 1000;
             date.setTime(date.getTime() + ms);
             expires = "; expires=" + date.toGMTString();
         }
@@ -116,10 +116,10 @@ let UtilFn = {
 
     // 获取cookie
     getCookie: function (name) {
-        var nameEQ = name + "=";
-        var ca = document.cookie.split(';'); //把cookie分割成组  
-        for (var i = 0; i < ca.length; i++) {
-            var c = ca[i]; //取得字符串  
+        let nameEQ = name + "=";
+        let ca = document.cookie.split(';'); //把cookie分割成组  
+        for (let i = 0; i < ca.length; i++) {
+            let c = ca[i]; //取得字符串  
             while (c.charAt(0) == ' ') { //判断一下字符串有没有前导空格  
                 c = c.substring(1, c.length); //有的话，从第二位开始取  
             }
@@ -155,7 +155,7 @@ let UtilFn = {
     // 设置弹窗垂直居中
     setPopupVerticalMid: function (domObj) {
         if ($(domObj)) {
-            var popupHeight = $(domObj).height(),
+            let popupHeight = $(domObj).height(),
                 winHeight = $(window).height();
             $(domObj).css({
                 'top': (winHeight - popupHeight) / 2,
@@ -168,7 +168,7 @@ let UtilFn = {
     // 生成弹窗
     addPopup: function (content, bClose) {
         this.delPopup();
-        var that = this;
+        let that = this;
         $('body').append('<div class="m_popup" id="popup"><div class="mask" id="popupMask"></div>' + content + '</div>');
         if (bClose) {
             $('#popupMask').bind('click', function () {
@@ -183,8 +183,9 @@ let UtilFn = {
 
     // 设置全局加载
     setLoading: function (sText) {
-        var text = sText || $('#loadingDefaultText').text();
+        let text = sText || 'Loading...';
         this.addPopup('<div class="w_loading">' + text + '</div>');
+        this.setPopupVerticalMid('.w_loading');
     },
 
     /**
@@ -201,13 +202,11 @@ let UtilFn = {
      *  rightActionText:    string 左侧按钮文本,
      *  rightActionFunc:    function 右侧按钮方法,
      *  rightActionStyle:   string 右侧按钮样式,
-     *  
      * }
      * 
      */
-    setDialog: function (oDialogParams) {
-        var that = this;
-        var title = oDialogParams.title ? oDialogParams.title : 'Title',
+    setDialog: function (oDialogParams, bClose) {
+        let title = oDialogParams.title ? oDialogParams.title : 'Title',
             content = oDialogParams.content,
             actionText = oDialogParams.actionText ? oDialogParams.actionText : 'Get it',
             leftActionText = oDialogParams.leftActionText ? oDialogParams.leftActionText : 'Cancel',
@@ -215,7 +214,7 @@ let UtilFn = {
             rightActionText = oDialogParams.rightActionText ? oDialogParams.rightActionText : 'Confirm',
             rightActionStyle = oDialogParams.rightActionStyle ? ' style="' + oDialogParams.rightActionStyle + '"' : '';
 
-        var ActionTmpl;
+        let ActionTmpl;
         if (oDialogParams.isDoubleAction) {
             ActionTmpl = '<section class="ft ft_Double">' +
                 '<a href="javascript:;" id="leftAction"' + leftActionStyle + '>' + leftActionText + '</a>' +
@@ -227,14 +226,14 @@ let UtilFn = {
                 '</section>';
         }
 
-        var tmpl = '<div class="m_dialog" id="dialog">' +
+        let tmpl = '<div class="m_dialog" id="dialog">' +
             '<section class="hd"><span class="title">' + title + '<span></section>' +
             '<section class="bd">' + content + '</section>' +
             ActionTmpl +
             '</div>';
 
-        that.addPopup(tmpl);
-        that.setPopupVerticalMid('#dialog');
+        this.addPopup(tmpl, (bClose ? true : false));
+        this.setPopupVerticalMid('#dialog');
 
         // 解决某些低端系统安卓机下（如nexus5、小米等），请求返回页面渲染的bug
         try {
@@ -247,6 +246,7 @@ let UtilFn = {
             }
         } catch (e) {}
 
+        let that = this;
         $('#action').bind('click', function () {
             that.delPopup();
             if (oDialogParams.actionFunc) {
@@ -267,31 +267,34 @@ let UtilFn = {
         });
     },
 
-    // 设置input框
+    /**
+     * 设置输入框
+     * 
+     */
     setInput: function (target) {
+        // 生成模板
         let attrObj = {
-            id: $(target).attr('id'),
-            type: $(target).attr('type'),
-            value: $(target).attr('value'),
-            label: $(target).attr('label')
+            id: $(target).attr('data-id') ? $(target).attr('data-id') : '',
+            class: $(target).attr('data-class'),
+            type: $(target).attr('data-type'),
+            value: $(target).attr('data-value'),
+            label: $(target).attr('data-label')
         };
-        let customTmpl = '';
-        if (attrObj.type === 'password') customTmpl = '<span class="w_icon w_icon_EyeClose js_pswToggle"></span>';
-        let tmpl = '<div class="w_input' + (attrObj.type === 'password' ? ' w_input_Psw' : '') + '">\
-                        <input type=' + attrObj.type + ' value="' + attrObj.value + '" id=' + attrObj.id + ' />\
+        let customTmpl = '',
+            isPassword = attrObj.type === 'password' && $('.js_pswToggle').length === 0 ? true : false; // 一个form表单只能有一个实际的密码框，不算密码确认框
+        if (isPassword) customTmpl = '<span class="w_icon w_icon_EyeClose js_pswToggle"></span>';
+        let tmpl = '<div class="w_input' + (isPassword ? ' w_input_Psw' : '') + '">\
+                        <input id="' + attrObj.id + '" class=' + attrObj.class + ' type=' + attrObj.type + ' value="' + attrObj.value + '" />\
                         <label>' + attrObj.label + '</label>\
                         ' + customTmpl + '\
                     </div>';
         $(target).after(tmpl).remove();
 
-        // handler
-        $('#' + attrObj.id).bind('focus', function() {
+        // 聚焦、输入、失焦处理
+        $('.' + attrObj.class).bind('focus', function() { // 聚焦，处理样式
             let $parent = $(this).parent();
             $parent.removeClass('w_input_Warn w_input_Valid').addClass('w_input_Active');
-        }).bind('blur', function() {
-            let $parent = $(this).parent();
-            $parent.removeClass('w_input_Active');
-        }).bind('keyup', function() {
+        }).bind('keyup', function() { // 输入，处理样式、删除按钮
             let $parent = $(this).parent(),
                 $del = $parent.children('.js_inputDel');
             if ($del) {
@@ -309,7 +312,65 @@ let UtilFn = {
                 $(that).val('');
                 that.focus();
             });
+        }).bind('blur', function() { // 失焦，处理样式、错误提示
+            let $parent = $(this).parent(),
+                value = $(this).val();
+            $parent.removeClass('w_input_Active');
+
+            // 内容不符合条件
+            $parent.addClass('w_input_Warn');
+            if (value === '') return;
+            switch ($(this).attr('class')) {
+                case 'js_inputEm': // 邮箱
+                    let emVal = UtilFn.removeLastBlank(value);
+                    if (!UtilFn.isEmail(emVal)) return UtilFn.setTip('邮箱格式错误，请重新输入');
+                    break;
+                case 'js_inputPh': // 手机
+                    if (!UtilFn.isPhoneValid(value)) return UtilFn.setTip('手机格式错误，请重新输入');
+                    break;
+                case 'js_inputPsw': // 密码
+                    if (!UtilFn.isPasswordValid(value)) return UtilFn.setTip('密码格式错误，请重新输入');
+                    // 联动检查确认密码
+                    let pswConfirmVal = $('.js_inputPsw_Confirm').val(),
+                        $parent = $('.js_inputPsw_Confirm').parent();
+                    console.log($parent);
+                    if (pswConfirmVal) {
+                        if (pswConfirmVal === value) {
+                            $parent.removeClass('w_input_Warn').addClass('w_input_Valid');
+                        } else {
+                            $parent.removeClass('w_input_Valid').addClass('w_input_Warn');
+                            UtilFn.setTip('两次密码不一致');
+                        }
+                    }
+                    break;
+                case 'js_inputPsw_Confirm': // 确认密码
+                    if (value !== $('.js_inputPsw').val()) return UtilFn.setTip('两次密码不一致');
+                    break;
+                default:
+                    break;
+            }
+
+            // 内容符合条件
+            $parent.removeClass('w_input_Warn').addClass('w_input_Valid');
         });
+
+        // 密码显隐处理
+        if (isPassword) {
+            $('.js_pswToggle').bind('click', function() {
+                let $parent = $(this).parents('form.js_form');
+                if ($(this).hasClass('w_icon_EyeClose')) {
+                    $(this).removeClass('w_icon_EyeClose').addClass('w_icon_EyeOpen');
+                    $parent.find('input[type="password"]').attr({
+                        "type": "text"
+                    });
+                } else {
+                    $(this).removeClass('w_icon_EyeOpen').addClass('w_icon_EyeClose');
+                    $parent.find('input[type="text"]').attr({
+                        "type": "password"
+                    });
+                }
+            });
+        }
     },
 
     // 提示

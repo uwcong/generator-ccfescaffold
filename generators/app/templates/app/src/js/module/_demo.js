@@ -19,6 +19,10 @@ $(function() {
             isDoubleAction: true
         });
     });
+    
+    $('#triggerLoading').bind('click', function () {
+        UtilFn.setLoading();
+    });
 
     $('tag-input').each(function() {
         UtilFn.setInput(this);

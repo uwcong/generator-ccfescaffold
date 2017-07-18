@@ -64,19 +64,27 @@
 
     <section class="block">
         <h1>FORM</h1>
-        <section class="m_formGroup">
-            <tag-input id="inputEm" type="text" value="" label="Label"></tag-input>
-        </section>
-        <section class="m_formGroup m_formGroup_Horizontal">
-            <span class="w_button js_button w_button_Hollow" id="sendVCode2Email">Button</span>
-            <tag-input id="inputEmCd" type="text" value="" label="Label"></tag-input>
-        </section>
-        <section class="m_formGroup js_pwGroup">
-            <tag-input id="inputEmPw" type="password" value="" label="Label"></tag-input>
-        </section>
-        <section class="m_action">
-            <span class="w_button js_button" id="bindEm">Submit</span>
-        </section>
+        <form class="js_form">
+            <section class="m_formGroup">
+                <tag-input data-id="email" data-class="js_inputEm" data-type="text" data-value="" data-label="Email"></tag-input>
+            </section>
+            <section class="m_formGroup">
+                <tag-input data-id="phone" data-class="js_inputPh" data-type="text" data-value="" data-label="Phone"></tag-input>
+            </section>
+            <section class="m_formGroup">
+                <tag-input data-id="password" data-class="js_inputPsw" data-type="password" data-value="" data-label="Password"></tag-input>
+            </section>
+            <section class="m_formGroup">
+                <tag-input data-class="js_inputPsw_Confirm" data-type="password" data-value="" data-label="Password Confirm"></tag-input>
+            </section>
+            <section class="m_formGroup m_formGroup_Horizontal">
+                <span class="w_button js_button w_button_Hollow">Button</span>
+                <tag-input data-id="label" data-class="js_label" data-type="text" data-value="" data-label="Label"></tag-input>
+            </section>
+            <section class="m_action">
+                <span class="w_button">Submit</span>
+            </section>
+        </form>
     </section>
 
     <section class="block">
@@ -89,8 +97,22 @@
         <span class="w_button" id="triggerDialog">Click to get the dialog</span>
     </section>
 
+    <section class="block">
+        <h1>LOADING</h1>
+        <span class="w_button" id="triggerLoading">Click to get the loading</span>
+    </section>
+
     <script src="../js/lib/fastclick.min.js"></script>
     <script src="../js/demo.js"></script>
+
+
+    <script>
+        $('body').click(function (event) {
+            if ($(event.target).attr('id') === 'popupMask') {
+                $('#popup').remove();
+            }
+        });
+    </script>
 </body>
 
 </html>

@@ -18,7 +18,7 @@ $inputActionSpace: 68px;
     input {
         @include box_sizing(border-box);
         width: 100%;
-        padding: px2rem(16px 0px);
+        padding: px2rem(16px $inputActionSpace 16px 0px);
         background: #fff;
         line-height: px2rem(30px);
         &:active {
@@ -99,7 +99,9 @@ $inputActionSpace: 68px;
 }
 
 .w_input_Psw {
-    padding-right: px2rem($inputActionSpace);
+    input {
+        padding-right: px2rem($inputActionSpace*2);
+    }
     .w_icon_InputDel {
         right: px2rem($inputActionSpace);
     }
