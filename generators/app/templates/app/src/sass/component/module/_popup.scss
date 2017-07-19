@@ -17,7 +17,7 @@
     right: 0;
     .mask {
         @extend .m_popup;
-        background: rgba(0, 0, 0, .3);
+        background: rgba(0, 0, 0, .5);
         @extend %gpu_accelerate;
         @include animation(maskShow .5s linear);
         &~* {

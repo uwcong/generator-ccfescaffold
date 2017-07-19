@@ -416,7 +416,7 @@ let UtilFn = {
                     }
                     break;
                 case 'js_inputPsw_Confirm': // 确认密码
-                    if (value === $('.js_inputPsw').val()) {
+                    if (value !== '' && value === $('.js_inputPsw').val()) {
                         bValid = true;
                     } else {
                         bValid = false;
