@@ -24,8 +24,17 @@ $(function() {
         UtilFn.setLoading();
     });
 
-    $('tag-input').each(function() {
-        UtilFn.setInput(this);
-    });
+    (() => {
+        $('form').each((index, item) => {
+            localStorage.setItem($(item).attr('data-symbol'), '');
+        });
+        $('tag-input').each((index, item) => {
+            UtilFn.setInput(item);
+        });
+        $('.js_formSubmit').each((index, item) => {
+            UtilFn.setSubmitBtn(item);
+        })
+    })()
+    
 });
 window.onload = function() {}

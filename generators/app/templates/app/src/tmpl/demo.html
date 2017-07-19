@@ -64,25 +64,21 @@
 
     <section class="block">
         <h1>FORM</h1>
-        <form class="js_form">
+        <form data-symbol="demoForm">
             <section class="m_formGroup">
-                <tag-input data-id="email" data-class="js_inputEm" data-type="text" data-value="" data-label="Email"></tag-input>
+                <tag-input data-id="email" data-class="js_inputEm" data-type="text" data-value="" data-label="Email" data-order="0" data-symbol="demoForm"></tag-input>
             </section>
             <section class="m_formGroup">
-                <tag-input data-id="phone" data-class="js_inputPh" data-type="text" data-value="" data-label="Phone"></tag-input>
+                <tag-input data-id="phone" data-class="js_inputPh" data-type="text" data-value="" data-label="Phone" data-order="3" data-symbol="demoForm"></tag-input>
             </section>
             <section class="m_formGroup">
-                <tag-input data-id="password" data-class="js_inputPsw" data-type="password" data-value="" data-label="Password"></tag-input>
+                <tag-input data-id="password" data-class="js_inputPsw" data-type="password" data-value="" data-label="Password" data-order="4" data-symbol="demoForm"></tag-input>
             </section>
             <section class="m_formGroup">
-                <tag-input data-class="js_inputPsw_Confirm" data-type="password" data-value="" data-label="Password Confirm"></tag-input>
-            </section>
-            <section class="m_formGroup m_formGroup_Horizontal">
-                <span class="w_button js_button w_button_Hollow">Button</span>
-                <tag-input data-id="label" data-class="js_label" data-type="text" data-value="" data-label="Label"></tag-input>
+                <tag-input data-id="passwordConfirm" data-class="js_inputPsw_Confirm" data-type="password" data-value="" data-label="Password Confirm" data-order="6" data-symbol="demoForm"></tag-input>
             </section>
             <section class="m_action">
-                <span class="w_button">Submit</span>
+                <span class="w_button js_formSubmit" data-symbol="demoForm">Submit</span>
             </section>
         </form>
     </section>
