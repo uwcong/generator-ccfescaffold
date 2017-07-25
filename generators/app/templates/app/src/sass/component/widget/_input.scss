@@ -36,6 +36,8 @@ $inputActionSpace: 68px;
         pointer-events: none;
         top: px2rem(50px);
         left: 0;
+        right: px2rem($inputActionSpace);
+        @extend %text_ellipsis;
         line-height: px2rem(30px);
         color: #999;
         transition: 0.2s ease all;

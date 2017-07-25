@@ -3,6 +3,7 @@
  * @author Cc
  * 
  */
+import {CommonVar} from './_var.js';
 
 let UtilFn = {
     // 动态设置html的font-size，用于rem的计算
@@ -288,8 +289,8 @@ let UtilFn = {
             type: $(target).attr('data-type'),
             value: $(target).attr('data-value'),
             label: $(target).attr('data-label'),
-            symbol: $(target).attr('data-symbol'), // 用于标记form表单的出错信息
-            order: $(target).attr('data-order'), // 用于决定提交时出错信息的顺序， 从0开始严格升序排序，提示数值最小值对应的内容
+            symbol: $(target).parents('form').attr('data-symbol'), // 用于标记form表单的出错信息
+            order: $(target).attr('data-order'), // 用于决定提交时出错信息的顺序， 一般按结构升序排序，提示数值最小值对应的内容
         };
         let customTmpl = '',
             isPassword = attrObj.type === 'password' && $('.js_pswToggle').length === 0 ? true : false; // 一个form表单只能有一个实际的密码框，不算密码确认框
@@ -301,32 +302,26 @@ let UtilFn = {
                     </div>';
         $(target).after(tmpl).remove();
 
-        // 设置错误信息到localstorage
+        // 设置form信息到localstorage
         let localData = JSON.parse(localStorage.getItem(attrObj.symbol) || '{}'),
             errorList = (localData.error && localData.error.length) ? localData.error : [],
             errorItem = {
                 id: attrObj.id,
                 class: attrObj.class,
                 order: attrObj.order
+            },
+            errorMsg = {
+                'js_inputEm': CommonVar.formError.email.empty,
+                'js_inputPh': CommonVar.formError.phone.empty,
+                'js_inputPsw': CommonVar.formError.password.empty,
+                'js_inputPsw_Confirm': CommonVar.formError.passwordConfirm.empty,
             };
-        switch (attrObj.class) {
-            case 'js_inputEm': // 邮箱
-                errorItem['msg'] = "邮箱不能为空";
-                break;
-            case 'js_inputPh': // 手机
-                errorItem['msg'] = "手机不能为空";
-                break;
-            case 'js_inputPsw': // 密码
-                errorItem['msg'] = "密码不能为空";
-                break;
-            case 'js_inputPsw_Confirm': // 确认密码
-                errorItem['msg'] = "确认密码不能为空";
-                break;
-            default:
-                break;
-        }
-        errorList.push(errorItem);
-        localStorage.setItem(attrObj.symbol, JSON.stringify({"error": errorList, "inputBlur": "false"}));
+        errorItem['msg'] = errorMsg[attrObj.class];
+        UtilFn.updateFormLSError(errorList, errorItem);
+        localData.error = errorList; // 错误信息集合，用于提交时提示
+        localData.inputBlur = "false"; // 失焦判定，用于提交时决定提示触发
+        localData.inputIds ? localData.inputIds.push(attrObj.id) : localData.inputIds = [attrObj.id]; // 输入框id，用于无错误时提交获取填写内容
+        localStorage.setItem(attrObj.symbol, JSON.stringify(localData));
 
         // 聚焦、输入、失焦处理
         $('.' + attrObj.class).bind('focus', function() { // 聚焦，处理样式
@@ -367,7 +362,7 @@ let UtilFn = {
                         bValid = true;
                     } else {
                         bValid = false;
-                        errorMsg = value === '' ? '邮箱不能为空' : '邮箱格式错误，请重新输入';
+                        errorMsg = value === '' ? CommonVar.formError.email.empty : CommonVar.formError.email.format;
                     }
                     break;
                 case 'js_inputPh': // 手机
@@ -375,13 +370,13 @@ let UtilFn = {
                         bValid = true;
                     } else {
                         bValid = false;
-                        errorMsg = value === '' ? '手机不能为空' : '手机格式错误，请重新输入';
+                        errorMsg = value === '' ? CommonVar.formError.phone.empty : CommonVar.formError.phone.empty;
                     }
                     break;
                 case 'js_inputPsw': // 密码
                     if (UtilFn.isPasswordValid(value)) {
                         bValid = true;
-                        UtilFn.updateFormError({
+                        UtilFn.updateFormLS({
                             bValid,
                             symbol: attrObj.symbol,
                             target: oTarget
@@ -401,7 +396,8 @@ let UtilFn = {
                             } else {
                                 $confirmParent.removeClass('w_input_Valid').addClass('w_input_Warn');
                                 bValid = false;
-                                errorMsg = '两次密码不一致';
+                                errorMsg = CommonVar.formError.passwordConfirm.format;
+                                // attrObj 为组件级别变量，因为检查对象有变化，所以对应的属性值也要对应变化
                                 attrObj.id = $(oTarget).attr('id');
                                 attrObj.class = $(oTarget).attr('class');
                                 attrObj.order = $(oTarget).attr('data-order');
@@ -409,7 +405,8 @@ let UtilFn = {
                         }
                     } else {
                         bValid = false;
-                        errorMsg = value === '' ? '密码不能为空' : '密码格式错误，请重新输入';
+                        errorMsg = value === '' ? CommonVar.formError.password.empty : CommonVar.formError.password.format;
+                        // attrObj 为组件级别变量，因为检查对象有变化，所以对应的属性值也要对应变化
                         attrObj.id = $(oTarget).attr('id');
                         attrObj.class = $(oTarget).attr('class');
                         attrObj.order = $(oTarget).attr('data-order');
@@ -420,7 +417,7 @@ let UtilFn = {
                         bValid = true;
                     } else {
                         bValid = false;
-                        errorMsg = '两次密码不一致';
+                        errorMsg = value === '' ? CommonVar.formError.passwordConfirm.empty : CommonVar.formError.passwordConfirm.format;
                     }
                     break;
                 default:
@@ -428,13 +425,13 @@ let UtilFn = {
             }
 
             if (bValid) {
-                UtilFn.updateFormError({
+                UtilFn.updateFormLS({
                     bValid,
                     symbol: attrObj.symbol,
                     target: oTarget
                 });
             } else {
-                UtilFn.updateFormError({
+                UtilFn.updateFormLS({
                     bValid,
                     symbol: attrObj.symbol,
                     target: oTarget,
@@ -469,17 +466,17 @@ let UtilFn = {
             });
         }
     },
-    // 更新localstorage里的错误信息，用于提交时检查使用
-    updateFormError: function (oParams) {
+    // 更新localstorage里的form表单信息，用于提交时检查使用
+    updateFormLS: function (oParams) {
         let bValid = oParams.bValid,
-            formSymbol = oParams.symbol,
+            symbol = oParams.symbol,
             target = oParams.target,
             id = oParams.id,
             cls = oParams.class,
             order = oParams.order,
             msg = oParams.msg;
 
-        let localData = JSON.parse(localStorage.getItem(formSymbol)),
+        let localData = JSON.parse(localStorage.getItem(symbol)),
             errorList = localData.error.length ? localData.error : [],
             bUpdate = false; // 判断是否更新错误信息
 
@@ -488,9 +485,8 @@ let UtilFn = {
                 bUpdate = true; // 已有错误信息，则更新
                 bValid ? arr.splice(index, 1) : item.msg = msg;
                 return false; // 终止循环
-            } else {
-                return true; // 继续循环
             }
+            return true; // 继续循环
         });
         // 未有错误信息且验证有错，则添加
         if (!bUpdate && !bValid) {
@@ -500,27 +496,29 @@ let UtilFn = {
                 order,
                 msg
             };
-
-            // 设置提示排序
-            // 从0开始严格按照升序排序，这时order只能小于或等于errorList.length
-            if (Number(order) >= errorList.length) { // 添加到数组结尾
-                errorList.push(errorItem);
-            } else { // 添加到指定位置
-                let afterIndex;
-                errorList.every((item, index, arr) => {
-                    if (Number(order) + 1 === Number(item.order)) {
-                        afterIndex = index;
-                        return false; // 终止循环
-                    } else {
-                        return true; // 继续循环
-                    }
-                });
-                errorList.splice(afterIndex, 0, errorItem);
-            }
+            UtilFn.updateFormLSError(errorList, errorItem);
         }
 
-        localStorage.setItem(formSymbol, JSON.stringify({"error": errorList, "inputBlur": (bValid ? "false" : "true")}));
-        console.log(localStorage.getItem(formSymbol));
+        localData.error = errorList;
+        localData.inputBlur = bValid ? "false" : "true";
+        localStorage.setItem(symbol, JSON.stringify(localData));
+        console.log(localStorage.getItem(symbol));
+    },
+    // 更新localstorage里的form表单错误信息
+    updateFormLSError: function (errorList, errorItem) {
+        if (errorList.length) {
+            errorList.every((item, index, arr) => {
+                if (Number(errorItem.order) < Number(item.order)) {
+                    arr.splice(index, 0, errorItem);
+                    return false;
+                } else if (index + 1 === arr.length) {
+                    arr.push(errorItem);
+                }
+                return true;
+            });
+        } else {
+            errorList.push(errorItem);
+        }
     },
 
 
@@ -529,13 +527,10 @@ let UtilFn = {
      * 
      */
     setSubmitBtn: function (target, validCallback) {
-        let attrObj = {
-            symbol: $(target).attr('data-symbol'), // 用于标记form表单的出错信息
-        };
-
+        let symbol = $(target).parents('form').attr('data-symbol');
         $(target).bind('click', function () {
             $(this).parents('form').find('input').parent().removeClass('w_input_Warn'); // 重置表单内输入框的错误样式
-            let localData = JSON.parse(localStorage.getItem(attrObj.symbol)),
+            let localData = JSON.parse(localStorage.getItem(symbol)),
                 errorList = localData.error.length ? localData.error : [];
 
             if (errorList.length) {
@@ -545,7 +540,7 @@ let UtilFn = {
 
                 if (localData.inputBlur === 'true') { // 输入框失焦，提示自身错误
                     localData.inputBlur = 'false';
-                    localStorage.setItem(attrObj.symbol, JSON.stringify(localData));
+                    localStorage.setItem(symbol, JSON.stringify(localData));
                 } else { // 非输入框失焦，提示高优先级错误
                     UtilFn.setTip(errorList[0].msg);
                 }

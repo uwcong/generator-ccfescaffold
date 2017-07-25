@@ -29,7 +29,7 @@ gulp.task('DevServer', function() {
     connect.server({
         root: config.devDir,
         host: 'localhost',
-        port: 8000,
+        port: 8020,
         livereload: true
     });
 });
@@ -37,7 +37,7 @@ gulp.task('BuildServer', function() {
     connect.server({
         root: config.buildDir,
         host: 'localhost',
-        port: 8001,
+        port: 8021,
         livereload: false
     });
 });
