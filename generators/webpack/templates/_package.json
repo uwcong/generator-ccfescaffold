@@ -1,0 +1,40 @@
+{
+    "name": "<%= name %>",
+    "version": "0.0.4",
+    "description": "<%= description %>",
+    "main": "index.js",
+    "author": "<%= author %>",
+    "repository": {
+        "type": "git",
+        "url": "<%= repo %>"
+    },
+    "keywords": [
+        "plugin",
+        "def"
+    ],
+    "license": "<%= license %>",
+    "readmeFilename": "README.md",
+    "dependencies": {},
+    "devDependencies": {
+        "babel-preset-es2015": "^6.24.1",
+        "babelify": "^7.3.0",
+        "browserify": "^14.4.0",
+        "copy": "^0.3.0",
+        "gulp": "^3.9.1",
+        "gulp-clean": "^0.3.2",
+        "gulp-compass": "^2.1.0",
+        "gulp-concat": "^2.6.1",
+        "gulp-connect": "^5.0.0",
+        "gulp-html-replace": "^1.6.2",
+        "gulp-htmlmin": "^3.0.0",
+        "gulp-imagemin": "^3.1.1",
+        "gulp-plumber": "^1.1.0",
+        "gulp-rename": "^1.2.2",
+        "gulp-sass": "^3.1.0",
+        "gulp-sourcemaps": "^2.6.0",
+        "gulp-strip-debug": "^1.1.0",
+        "gulp-uglify": "^2.1.0",
+        "vinyl-buffer": "^1.0.0",
+        "vinyl-source-stream": "^1.1.0"
+    }
+}

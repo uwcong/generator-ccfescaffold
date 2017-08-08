@@ -1,0 +1,42 @@
+@charset "UTF-8";
+
+/**
+ * _button.scss
+ * @author Cc
+ * @date 2016-04-01
+ * @description widget级别组件：按钮
+ *
+ */
+
+// button 
+.w_button {
+    @include box_sizing(border-box);
+    display: inline-block;
+    width: 100%;
+    height: px2rem(80px);
+    line-height: px2rem(76px);
+    background: $themeColor;
+    border: 1px solid $themeColor;
+    border-radius: px2rem(40px);
+    text-align: center;
+    color: #fff;
+    cursor: pointer;
+    &:active {
+        @include transform(scale(.95));
+    }
+}
+
+.w_button_Hollow {
+    background: transparent;
+    color: $themeColor;
+}
+
+.w_button_Disabled {
+    background: transparent;
+    border-color: #ccc;
+    color: #ccc;
+    &:active {
+        @include transform(scale(1));
+    }
+}
+

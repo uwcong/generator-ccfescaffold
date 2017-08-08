@@ -1,0 +1,22 @@
+@charset "UTF-8";
+
+/**
+ * component.scss
+ * @author Cc
+ * @date 2016-04-01
+ * @description 常用组件，有widget和module两种级别。module级别大于widget，即文档结构上module可以作为父节点包含widget使用。
+ *
+ */
+
+
+/* compass Helper */
+
+@import "compass";
+
+/* widget */
+
+@import "widget/widget";
+
+/* module */
+
+@import "module/module";

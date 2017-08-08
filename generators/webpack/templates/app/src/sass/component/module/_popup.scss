@@ -1,0 +1,64 @@
+@charset "UTF-8";
+
+/**
+ * _popup.scss
+ * @author Cc
+ * @date 2016-04-01
+ * @description module级别组件：弹层遮罩
+ *
+ */
+
+.m_popup {
+    position: fixed;
+    z-index: 10;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    .mask {
+        @extend .m_popup;
+        background: rgba(0, 0, 0, .5);
+        @extend %gpu_accelerate;
+        @include animation(maskShow .5s linear);
+        &~* {
+            @extend %gpu_accelerate;
+            @include animation(contentShow .2s linear);
+        }
+    }
+}
+
+@keyframes maskShow {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@-webkit-keyframes maskShow {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes contentShow {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@-webkit-keyframes contentShow {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}

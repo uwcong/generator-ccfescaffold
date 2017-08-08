@@ -1,0 +1,48 @@
+@charset "UTF-8";
+
+/**
+ * _header.scss
+ * @author Cc
+ * @date 2016-04-01
+ * @description module级别组件：移动端头部
+ *
+ */
+
+.m_header {
+    position: relative;
+    height: px2rem(88px);
+    @include box_shadow(0 1px 1px 0 #cfdce6);
+    .w_icon_Back {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: px2rem(122px);
+        height: 100%;
+        background-position: center;
+        &:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: transparent;
+        }
+        &:active:before {
+            background: $clickActiveBackground;
+            /* key note：事件穿透 */
+            pointer-events: none;
+        }
+    }
+    .title {
+        display: block;
+        font-size: px2rem(40px);
+        line-height: px2rem(88px);
+        text-align: center;
+        color: $themeColor;
+    }
+}
+
+.m_header_Hide {
+    display: none;
+}

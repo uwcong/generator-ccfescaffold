@@ -139,7 +139,7 @@ module.exports = generators.extend({
     end: function() {
         this.log('end');
         this.log(yosay(
-            'Your app has been created successfully!'
+            'Your app in webpack has been created successfully!'
         ));
     }
 });

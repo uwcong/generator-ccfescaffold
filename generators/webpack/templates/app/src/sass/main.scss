@@ -1,0 +1,590 @@
+@charset "utf-8";
+
+/**
+ * main.scss
+ * @author Cc 
+ * @date 2016-04-01
+ *
+ */
+
+$themeColor: #0a62b5;
+$clickActiveBackground: rgba(0,0,0,.1);
+$defaultSpace: 50px;
+
+/* compass Helper */
+
+@import "compass";
+
+/* helper */
+
+@import "helper/helper";
+
+/* component */
+
+@import "component/component";
+
+/* 设计稿宽度，默认750px，按实际设置，这样下面用到的px2rem方法所需的参数值都是设计稿上量度的px值 */
+
+$design-width: 750px;
+
+/* 具体样式 */
+
+// global
+.g_head {
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: #fff;
+    @include box_shadow(0 1px 1px 0 #cfdce6);
+    .m_header {
+        @include box_shadow(none);
+    }
+}
+
+.g_body {
+    padding: px2rem(88px $defaultSpace $defaultSpace);
+}
+
+// page
+.p_binding {
+    .g_body {
+        padding-top: px2rem(172px);
+        padding-bottom: px2rem(172px);
+    }
+    .intl-tel-input.iti-container,
+    .m_formGroup_Phone .intl-tel-input .country-list {
+        top: px2rem(172px)!important;
+    }
+}
+
+// tab
+.m_tab {
+    font-size: 0;
+}
+
+$itemNum: 3;
+.m_tab {
+    .item {
+        display: inline-block;
+        box-sizing: border-box;
+        width: px2rem($design-width / 3);
+        line-height: px2rem(80px);
+        border-bottom: 2px solid transparent;
+        text-align: center;
+        color: #ffca64;
+        font-size: px2rem(32px);
+        &:active {
+            background: $clickActiveBackground;
+        }
+    }
+    .item_Curr {
+        border-bottom-color: $themeColor;
+        color: $themeColor;
+    }
+}
+
+.m_tabCnt {
+    display: none;
+}
+
+// 绑定主体内容
+.m_state {
+    display: none;
+    padding-top: px2rem(80px);
+    line-height: px2rem(50px);
+    .signal {
+        display: block;
+        margin: 0 auto px2rem($defaultSpace);
+    }
+    .title,
+    .desc {
+        margin-bottom: px2rem(25px);
+        text-align: center;
+    }
+    .title {
+        .emAddr {
+            color: #666;
+        }
+    }
+    .desc {
+        font-size: px2rem(25px);
+        color: #666;
+    }
+    .act {
+        margin-top: px2rem(50px);
+        .w_button {
+            margin-bottom: px2rem(25px);
+        }
+    }
+}
+
+.m_state_Ing {
+    padding-top: px2rem(60px);
+}
+
+// 绑定统一提示
+.m_bindTips {
+    position: absolute;
+    bottom: px2rem($defaultSpace);
+    left: px2rem($defaultSpace);
+    right: px2rem($defaultSpace);
+    text-align: center;
+    font-size: px2rem(25px);
+    color: #999;
+}
+
+// 列表组件
+$navListSpace: 25px;
+.m_navList {
+    padding-top: px2rem($defaultSpace);
+    .desc {
+        margin-bottom: px2rem($navListSpace);
+        font-size: px2rem(25px);
+        color: #999;
+    }
+    .item {
+        @include box_shadow(2px 2px 2px 0 #cfdce6);
+        margin-bottom: px2rem($navListSpace);
+        li {
+            margin-top: -1px;
+            padding: px2rem($navListSpace);
+            padding-right: px2rem(6px+$navListSpace*2);
+            background: #fff;
+            border: 1px solid #cacaca;
+            .link {
+                position: relative;
+                display: block;
+                color: #333;
+                margin: px2rem(-$navListSpace);
+                margin-right: px2rem(-(6px+$navListSpace*2));
+                padding: px2rem($navListSpace);
+                padding-right: px2rem(6px+$navListSpace*2);
+                cursor: pointer;
+                &:active {
+                    background: $clickActiveBackground;
+                }
+                &:before {
+                    content: '';
+                    position: absolute;
+                    top: 50%;
+                    right: px2rem($navListSpace);
+                    margin-top: px2rem(-14px);
+                    @extend .w_icon;
+                    @extend .w_icon_Goto;
+                }
+            }
+            .title,
+            .intro {
+                word-wrap: break-word;
+            }
+            .title {
+                line-height: px2rem(36px);
+                @extend %clear;
+            }
+            .titleCnt {
+                float: right;
+                max-width: 55%;
+                @extend %text_ellipsis;
+                color: #999;
+                font-size: px2rem(25px);
+            }
+            .titleCnt_Hl {
+                font-weight: bold;
+                color: $themeColor;
+            }
+            .intro {
+                margin: px2rem(10px 0px -10px);
+                font-size: px2rem(25px);
+                color: #999;
+            }
+        }
+    }
+    .item_Switch {
+        li {
+            position: relative;
+            padding-right: px2rem(100px+$navListSpace*2);
+            .w_icon {
+                display: none;
+            }
+            .w_icon_SwitchOn,
+            .w_icon_SwitchOff {
+                display: block;
+                position: absolute;
+                top: 50%;
+                right: px2rem(25px);
+                margin-top: px2rem(-27px);
+                cursor: pointer;
+            }
+        }
+    }
+}
+
+$logoIconWidth: image-width("../images/icon_account_2x.png");
+.m_navList_Uc {
+    .item li {
+        position: relative;
+        .title {
+            padding-left: px2rem($logoIconWidth + $navListSpace - 10px);
+        }
+    }
+    .w_icon_Account,
+    .w_icon_Point,
+    .w_icon_Safe,
+    .w_icon_ChangePsw,
+    .w_icon_ResetPsw,
+    .w_icon_Recharge,
+    .w_icon_Setting {
+        position: absolute;
+        top: 50%;
+        left: px2rem($navListSpace);
+        margin-top: px2rem(-$logoIconWidth / 2);
+    }
+}
+
+// 表单相关
+.m_formGroup {
+    @extend %clear;
+    margin-bottom: px2rem(25px);
+    .w_input {
+        overflow: hidden;
+    }
+    .formTip {
+        margin-top: px2rem(10px);
+        font-size: px2rem(25px);
+        color: #999;
+    }
+}
+
+.m_formGroup_Phone {
+    position: relative;
+    .w_input {
+        position: relative;
+        .areaCode {
+            position: absolute;
+            width: px2rem(134px);
+            top: px2rem(35px);
+            left: 0;
+            padding: px2rem(16px 0px);
+            line-height: px2rem(30px);
+            &:before {
+                @include triangle(px2rem(10px), px2rem(14px), 'right', #333);
+                position: absolute;
+                top: px2rem(22px);
+                right: px2rem(20px);
+            }
+            &:after {
+                content: '';
+                position: absolute;
+                top: px2rem(16px);
+                right: 0;
+                width: 1px;
+                height: px2rem(30px);
+                background: #999;
+            }
+        }
+        input {
+            padding-left: px2rem(160px);
+        }
+        label {
+            left: px2rem(160px);
+        }
+    }
+    .w_input_Active,
+    .w_input_Warn,
+    .w_input_Valid {
+        label {
+            left: 0;
+        }
+    }
+    .w_input_Readonly {
+        &~.intl-tel-input.allow-dropdown {
+            display: none;
+        }
+        .areaCode {
+            width: auto;
+            float: left;
+            position: relative;
+            top: 0;
+            padding-right: px2rem(18px);
+            margin: px2rem(7px 15px 0px 0px);
+            &:before {
+                display: none;
+            }
+            &:after {
+                // top: 0;
+            }
+        }
+        input {
+            width: auto;
+            padding-left: 0;
+            float: left;
+        }
+    }
+    .intl-tel-input.allow-dropdown {
+        position: absolute;
+        top: 0;
+        left: 0;
+        .flag-container {
+            position: absolute;
+            z-index: 22;
+            top: px2rem(35px);
+            width: px2rem(140px);
+            height: px2rem(65px);
+            .selected-flag {
+                padding: 0;
+                width: auto;
+                opacity: 0;
+            }
+        }
+
+        // 宽屏情况下，下拉框靠近选择框，这是插件的实现方式，所以只能强制修改样式
+        .country-list {
+            position: fixed;
+            top: px2rem(88px);
+            bottom: px2rem(0px);
+            left: px2rem(180px);
+            right: px2rem(0px);
+            z-index: 0;
+            max-height: none;
+        }
+    }
+}
+
+.m_formGroup_Horizontal {
+    .w_button {
+        width: auto;
+        float: right;
+        padding: px2rem(0px 30px);
+        margin: px2rem(25px 0px 0px 10px);
+    }
+}
+
+// 底部操作區域
+.m_action {
+    margin-top: px2rem(50px);
+}
+
+// 国际手机区号插件
+.intl-tel-input.iti-container {
+    position: absolute!important;
+    top: px2rem(88px)!important;
+    bottom: px2rem(0px)!important;
+    left: px2rem(180px)!important;
+    right: px2rem(0px)!important;
+    z-index: 0;
+}
+.intl-tel-input .country-list {
+    border: 0;
+    @include box_shadow(-1px 0 1px 0 #cfdce6);
+    overflow-y: scroll; /* has to be scroll, not auto */
+    -webkit-overflow-scrolling: touch;
+    &::-webkit-scrollbar {
+        width: px2rem(20px);
+        height: px2rem(20px);
+    }
+    &::-webkit-scrollbar-thumb {
+        border-radius: px2rem(10px);
+        background-color: #999;
+    }
+    .flag-box {
+        display: none;
+    }
+    .country {
+        &:active {
+            background: rgba(0,0,0,.05);
+        }
+        .dial-code {
+            float: right;
+        }
+    }
+}
+
+// 帮助中心
+.m_helpCenter {
+    padding-top: px2rem($defaultSpace);
+    h1 {
+        position: relative;
+        padding: px2rem(30px 0px 20px 20px);
+        font-weight: normal;
+        font-size: px2rem(32px);
+        color: #222;
+        &:first-child {
+            padding-top: 0;
+            &:before {
+                top: px2rem(4px);
+            }
+        }
+        &:before {
+            content: '';
+            position: absolute;
+            top: px2rem(34px);
+            left: 0;
+            width: px2rem(5px);
+            height: px2rem(30px);
+            background: $themeColor;
+        }
+    }
+    p {
+        margin-bottom: px2rem(10px);
+        font-size: px2rem(28px);
+        color: #666;
+    }
+}
+
+// 帐户（昵称）
+.m_account {
+    padding-top: px2rem($defaultSpace);
+}
+.w_account_desc {
+	color: #999;
+	font-size: px2rem(28px);
+	line-height: px2rem(30px);
+	margin-top: px2rem(15px);
+}
+
+// 绑定页邀请
+.w_invite {
+    display: none;
+    .title {
+        text-align: left;
+        font-size: px2rem(30px);
+        color: #333;
+    }
+    .invite_desc_item {
+        font-size: px2rem(25px);
+        line-height: px2rem(80px);
+        height: px2rem(80px);
+        text-align: center;
+        color: #666;
+        border: px2rem(1px) solid #ccc;
+        box-shadow: px2rem(0px) px2rem(2px) px2rem(2px) px2rem(0px) rgba(0, 0, 0, 0.2) inset;
+        border-radius: px2rem(10px);
+        margin-bottom: px2rem(25px);
+        .w_icon_Invite30,
+        .w_icon_Invite50 {
+            display: inline-block;
+            margin-left: px2rem(8px);
+            vertical-align: px2rem(-9px);
+        }
+    }
+}
+
+
+// point 頁面
+.p_point {
+    height: 100%;
+    background: #fff;
+    .g_body {
+        box-sizing: border-box;
+        padding: px2rem(88px 0px 0px);
+        height: 100%;
+        overflow: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+    .m_dialog {
+        width: px2rem(610px);
+        margin-left: px2rem(-305px);
+        h1,
+        p {
+            font-size: px2rem(30px);
+            text-align: left;
+        }
+        h1 {
+            color: #333;
+            line-height: px2rem(48px);
+        }
+        p {
+            color: #666;
+            margin-bottom: px2rem(50px);
+        }
+    }
+}
+
+.m_point {
+    padding: px2rem(30px $defaultSpace 20px);
+    background: #fefbf6;
+    border-bottom: 1px solid #ccc;
+    .desc1, 
+    .desc2 {
+        color: #333;
+        font-size: px2rem(30px);
+        line-height: px2rem(40px);
+        word-wrap: break-word;
+    }
+    .w_icon_PointList {
+        vertical-align: text-bottom;
+        margin-right: px2rem(10px);
+    }
+    .balance {
+        line-height: px2rem(260px);
+        text-align: center;
+        span.number {
+            display: inline-block;
+            position: relative;
+            color: $themeColor;
+            font-size: px2rem(70px);
+            line-height: px2rem(70px);
+            .w_icon_PointHelp {
+                position: absolute;
+                right: px2rem(-60px);
+                top: px2rem(15px);
+            }
+        }
+    }
+}
+.pointList_no {
+    display: none;
+    text-align: center;
+    font-size: px2rem(30px);
+    color: #666;
+    padding-top: px2rem(150px);
+}
+.m_pointList {
+    background: #fff;
+    .w_pointList_item {
+        border-bottom: 1px solid #ccc;
+        padding: px2rem(25px) px2rem(50px);
+        span {
+            display: block;
+        }
+        .number,
+        .title, {
+            color: #666;
+            font-size: px2rem(29px);
+            line-height: px2rem(29px);
+        }
+        .balance,
+        .date {
+            color: #999;
+            font-size: px2rem(24px);
+            line-height: px2rem(24px);
+        }
+        .number,
+        .balance {
+            float: right;
+            color: #666;
+        }
+        .title {
+            margin-bottom: px2rem(20px);
+        }
+    }
+}
+.w_pointList_tip {
+    display: none;
+    line-height: px2rem(100px);
+    text-align: center;
+    span {
+        vertical-align: middle;
+        color: #666;
+        font-size: px2rem(29px);
+    }
+    .w_icon_Loading {
+        margin-right: px2rem(20px);
+        -webkit-animation-name: loading;
+        -webkit-animation-duration: 0.8s;
+        -webkit-animation-iteration-count: infinite;
+        -webkit-animation-timing-function: linear;
+    }
+}

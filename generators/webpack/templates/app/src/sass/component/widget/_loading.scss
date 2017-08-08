@@ -1,0 +1,73 @@
+@charset "UTF-8";
+
+/**
+ * _loading.scss
+ * @author Cc
+ * @date 2016-04-01
+ * @description widget级别组件：加载
+ *
+ */
+
+.w_loading {
+    position: absolute;
+    z-index: 20;
+    width: px2rem(250px);
+    top: 40%;
+    left: 50%;
+    margin-left: px2rem(-125px);
+    padding: px2rem(20px 0px 30px);
+    background: rgba(0,0,0,.5);
+    box-sizing: border-box;
+    border-radius: px2rem(10px);
+    overflow: hidden;
+    text-align: center;
+    color: #fff;
+    &:before {
+        content: '';
+        display: block;
+        margin: px2rem(10px) auto px2rem(15px);
+        width: 41px;
+        height: 41px;
+        background: inline-image("../images/icon_loading_2x.png") no-repeat;
+        background-size: contain;
+        @extend %gpu_accelerate;
+        @include animation(loading .8s linear infinite);
+    }
+}
+
+@keyframes loading {
+    0% {
+        transform: rotate(0deg);
+    }
+    25% {
+        transform: rotate(90deg);
+    }
+    50% {
+        transform: rotate(180deg);
+    }
+    75% {
+        transform: rotate(270deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@-webkit-keyframes loading {
+    0% {
+        -webkit-transform: rotate(0deg);
+    }
+    25% {
+        -webkit-transform: rotate(90deg);
+    }
+    50% {
+        -webkit-transform: rotate(180deg);
+    }
+    75% {
+        -webkit-transform: rotate(270deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
