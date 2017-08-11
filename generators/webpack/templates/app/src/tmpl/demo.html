@@ -8,13 +8,13 @@
     <meta name="format-detection" content="telephone=no" />
     <title>Rebate</title>
     <link rel="shortcut icon" type="image/x-icon" href="https://rebate.130qq.com/static/images/favicon.ico">
-    <link href="../css/main.css" rel="stylesheet">
-    <script src="../js/lib/jquery.min.js"></script>
+    <link href="/css/main.css" rel="stylesheet">
+    <script src="/js/lib/jquery.min.js"></script>
     <script>
-        (function() {
+        (function () {
             var docEl = document.documentElement,
                 resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
-                recalc = function() {
+                recalc = function () {
                     var clientWidth = docEl.clientWidth;
                     if (!clientWidth) return;
                     docEl.style.fontSize = (clientWidth * 0.1) + 'px';
@@ -30,12 +30,14 @@
             padding: 10px;
             border: 1px solid #ddd;
         }
+
         .block h1 {
             position: absolute;
             top: -.4rem;
             left: 0;
             font-size: inherit;
         }
+
         .block_ButtonList .w_button {
             margin: 0 5px 0 0;
             width: 30%;
@@ -69,13 +71,15 @@
                 <tag-input data-id="email" data-class="js_inputEm" data-type="text" data-value="" data-label="Email" data-order="0"></tag-input>
             </section>
             <section class="m_formGroup">
-                <tag-input data-id="phone" data-class="js_inputPh" data-type="text" data-value="" data-label="PhonePhonePhonePhonePhonePhonePhonePhonePhonePhonePhonePhone" data-order="1"></tag-input>
+                <tag-input data-id="phone" data-class="js_inputPh" data-type="text" data-value="" data-label="PhonePhonePhonePhonePhonePhonePhonePhonePhonePhonePhonePhone"
+                    data-order="1"></tag-input>
             </section>
             <section class="m_formGroup">
                 <tag-input data-id="password" data-class="js_inputPsw" data-type="password" data-value="" data-label="Password" data-order="2"></tag-input>
             </section>
             <section class="m_formGroup">
-                <tag-input data-id="passwordConfirm" data-class="js_inputPsw_Confirm" data-type="password" data-value="" data-label="Password Confirm" data-order="3"></tag-input>
+                <tag-input data-id="passwordConfirm" data-class="js_inputPsw_Confirm" data-type="password" data-value="" data-label="Password Confirm"
+                    data-order="3"></tag-input>
             </section>
             <section class="m_action">
                 <span class="w_button js_formSubmit">Submit</span>
@@ -98,8 +102,8 @@
         <span class="w_button" id="triggerLoading">Click to get the loading</span>
     </section>
 
-    <script src="../js/lib/fastclick.min.js"></script>
-    <script src="../js/demo.js"></script>
+    <script src="/js/lib/fastclick.min.js"></script>
+    <script src="/js/demo.js"></script>
 
 
     <script>
