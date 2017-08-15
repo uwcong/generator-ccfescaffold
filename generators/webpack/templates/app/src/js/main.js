@@ -1,5 +1,39 @@
-console.log(34);
-console.log(123);
-$('.w_button_Hollow').css({
-   "background": 'url("/images/icon_account_2x.png")'
+import $ from 'jquery';
+import FastClick from 'fastclick';
+import CommonVar from './module/common/_var.js';
+import UtilFn from './module/common/_util.js';
+
+console.log(UtilFn);
+
+$(function() {
+    FastClick.attach(document.body);
+
+    $('#triggerTip').bind('click', function () {
+        UtilFn.setTip('TIP');
+        console.log(1);
+    });
+
+    $('#triggerDialog').bind('click', function () {
+        UtilFn.setDialog({
+            title: 'Dialog title',
+            content: 'Dialog content',
+            isDoubleAction: true
+        });
+    });
+    
+    $('#triggerLoading').bind('click', function () {
+        UtilFn.setLoading();
+    });
+
+    (() => {
+        $('form').each((index, item) => {
+            localStorage.setItem($(item).attr('data-symbol'), '');
+        });
+        $('tag-input').each((index, item) => {
+            UtilFn.setInput(item);
+        });
+        $('.js_formSubmit').each((index, item) => {
+            UtilFn.setSubmitBtn(item);
+        })
+    })() 
 });

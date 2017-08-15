@@ -1,3 +1,9 @@
+/**
+ * 基础环境配置
+ * @author Cc
+ * 
+ */
+
 var Webpack = require('webpack');
 var Path = require('path');
 var UglifyJsPlugin = Webpack.optimize.UglifyJsPlugin;
@@ -6,6 +12,7 @@ var CommonsChunkPlugin = Webpack.optimize.CommonsChunkPlugin;
 module.exports = {
   entry: {
     main: [Path.resolve(__dirname, '../app/src/js/main.js')], // 定义入口文件
+    vendor: ['jquery', 'fastclick'],
   },
   output: { // 定义出口目录
     // path: path.resolve(__dirname, '../app/src'),
@@ -17,7 +24,6 @@ module.exports = {
   resolve: { // resolve 指定可以被 import 的文件后缀
     extensions: ['.js']
   },
-  // devtool: 'source-map',
   module: {
     rules: [{
         test: /\.js[x]?$/,

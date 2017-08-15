@@ -3,11 +3,14 @@
  * @author Cc
  * 
  */
-import {CommonVar} from './_var.js';
+import $ from 'jquery';
+import CommonVar from './_var.js';
 
-let UtilFn = {
+class UtilFn {
+    constructor() {}
+    
     // 动态设置html的font-size，用于rem的计算
-    setHtmlFontSize: function (doc, win) {
+    setHtmlFontSize(doc, win) {
         let docEl = doc.documentElement,
             resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
             recalc = function () {
@@ -20,10 +23,10 @@ let UtilFn = {
         win.addEventListener(resizeEvt, recalc, false);
         // DOM加载之后及资源加载之前去执行，即对应jQuery中的document ready
         doc.addEventListener('DOMContentLoaded', recalc, false);
-    },
+    }
 
     // 获取location search参数，返回一个search对象
-    getLocationSearchObj: function (qstring) {
+    getLocationSearchObj(qstring) {
         let splitUrl = qstring.split("?");
         let strUrl = (splitUrl.length > 1) ? decodeURIComponent(splitUrl[1]).split("&") : [];
         let str = "";
@@ -33,19 +36,19 @@ let UtilFn = {
             obj[str[0]] = str[1];
         }
         return Array.prototype.sort.call(obj);
-    },
+    }
 
     // 判断环境
-    isiOS: function () {
+    isiOS() {
         return !!navigator.userAgent.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);
-    },
-    isAndriod: function () {
+    }
+    isAndriod() {
         return /android/.test(navigator.userAgent.toLowerCase());
-    },
-    isWeChat: function () {
+    }
+    isWeChat() {
         return /micromessenger/.test(navigator.userAgent.toLowerCase());
-    },
-    isPc: function () {
+    }
+    isPc() {
         let userAgentInfo = navigator.userAgent.toLowerCase();
         let agents = ["android", "iphone", "ipad", "ipod", "symbianos", "windows phone"];
         let flag = true;
@@ -56,25 +59,25 @@ let UtilFn = {
             }
         }
         return flag;
-    },
+    }
 
     // 邮箱格式验证
-    isEmail: function (str) {
+    isEmail(str) {
         return /^([a-zA-Z0-9\._-])+@([a-zA-Z0-9_-])+((\.[a-zA-Z0-9_-]+)+)$/.test(str);
-    },
+    }
 
     // 手机格式验证: 不少于7位数字
-    isPhoneValid: function (str) {
+    isPhoneValid(str) {
         return /^[0-9]{7,}$/.test(str);
-    },
+    }
 
     // 密码格式验证: 7-20位数字或者字母
-    isPasswordValid: function (str) {
+    isPasswordValid(str) {
         return /^[a-zA-Z0-9]{7,20}$/.test(str);
-    },
+    }
 
     // 时间戳转换格式
-    date: function (s, fmt) {
+    date(s, fmt) {
         if (typeof s == "string") {
             s = Number(s);
         }
@@ -97,10 +100,10 @@ let UtilFn = {
             if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
         }
         return fmt;
-    },
+    }
 
     // 设置cookie
-    setCookie: function (name, value, days) {
+    setCookie(name, value, days) {
         days = days || 0;
         let expires = "";
         if (days != 0) { //设置cookie过期时间  
@@ -113,10 +116,10 @@ let UtilFn = {
             expires = "; expires=Fri, 31 Dec 9999 23:59:59 GMT";
         }
         document.cookie = name + "=" + value + expires + "; path=/";
-    },
+    }
 
     // 获取cookie
-    getCookie: function (name) {
+    getCookie(name) {
         let nameEQ = name + "=";
         let ca = document.cookie.split(';'); //把cookie分割成组  
         for (let i = 0; i < ca.length; i++) {
@@ -129,30 +132,30 @@ let UtilFn = {
             }
         }
         return false;
-    },
+    }
 
     // 清除cookies
-    clearCookie: function (name) {
+    clearCookie(name) {
         this.setCookie(name, "", -1);
-    },
+    }
 
     // 获取特定localstorage
-    getLocalStorage: function (key, callback) {
+    getLocalStorage(key, callback) {
         let data = window.localStorage.getItem(key);
         if (data) {
             callback(data);
         } else {
             data = null;
         }
-    },
+    }
 
     // 去掉结尾空格
-    removeLastBlank: function (value) {
+    removeLastBlank(value) {
         return value.replace(/(\s*$)/g, "");
-    },
+    }
 
     // 设置弹窗垂直居中
-    setPopupVerticalMid: function (domObj) {
+    setPopupVerticalMid(domObj) {
         if ($(domObj)) {
             let popupHeight = $(domObj).height(),
                 winHeight = $(window).height();
@@ -162,10 +165,10 @@ let UtilFn = {
         } else {
             alert("Popup is not exist！");
         }
-    },
+    }
 
     // 生成弹窗
-    addPopup: function (content, bClose) {
+    addPopup(content, bClose) {
         this.delPopup();
         let that = this;
         $('body').append('<div class="m_popup" id="popup"><div class="mask" id="popupMask"></div>' + content + '</div>');
@@ -174,27 +177,27 @@ let UtilFn = {
                 that.delPopup();
             });
         }
-    },
+    }
     // 删除弹窗
-    delPopup: function () {
+    delPopup() {
         $('#popup').remove();
-    },
+    }
 
     // 提示
-    setTip: function (sTip, oParams) {
+    setTip(sTip, oParams) {
         $('body').append('<span class="w_tip js_tip"><span class="text">' + sTip + '</span></span>');
         setTimeout(function () {
             $('.js_tip').remove();
             if (oParams && oParams.callback) oParams.callback();
         }, (oParams && oParams.msec ? oParams.msec : 1000));
-    },
+    }
 
     // 设置全局加载
-    setLoading: function (sText) {
+    setLoading(sText) {
         let text = sText || 'Loading...';
         this.addPopup('<div class="w_loading">' + text + '</div>');
         this.setPopupVerticalMid('.w_loading');
-    },
+    }
 
 
     /**
@@ -214,7 +217,7 @@ let UtilFn = {
      * }
      * 
      */
-    setDialog: function (oDialogParams, bClose) {
+    setDialog(oDialogParams, bClose) {
         let title = oDialogParams.title ? oDialogParams.title : 'Title',
             content = oDialogParams.content,
             actionText = oDialogParams.actionText ? oDialogParams.actionText : 'Get it',
@@ -274,14 +277,15 @@ let UtilFn = {
                 oDialogParams.rightActionFunc();
             }
         });
-    },
+    }
 
 
     /**
      * 设置form表单输入框
      * 
      */
-    setInput: function (target) {
+    setInput(target) {
+        let that = this;
         // 生成模板
         let attrObj = {
             id: $(target).attr('data-id'),
@@ -317,7 +321,7 @@ let UtilFn = {
                 'js_inputPsw_Confirm': CommonVar.formError.passwordConfirm.empty,
             };
         errorItem['msg'] = errorMsg[attrObj.class];
-        UtilFn.updateFormLSError(errorList, errorItem);
+        this.updateFormLSError(errorList, errorItem);
         localData.error = errorList; // 错误信息集合，用于提交时提示
         localData.inputBlur = "false"; // 失焦判定，用于提交时决定提示触发
         localData.inputIds ? localData.inputIds.push(attrObj.id) : localData.inputIds = [attrObj.id]; // 输入框id，用于无错误时提交获取填写内容
@@ -357,8 +361,8 @@ let UtilFn = {
                 errorMsg;
             switch ($(this).attr('class')) {
                 case 'js_inputEm': // 邮箱
-                    let emVal = UtilFn.removeLastBlank(value);
-                    if (UtilFn.isEmail(emVal)) {
+                    let emVal = that.removeLastBlank(value);
+                    if (that.isEmail(emVal)) {
                         bValid = true;
                     } else {
                         bValid = false;
@@ -366,7 +370,7 @@ let UtilFn = {
                     }
                     break;
                 case 'js_inputPh': // 手机
-                    if (UtilFn.isPhoneValid(value)) {
+                    if (that.isPhoneValid(value)) {
                         bValid = true;
                     } else {
                         bValid = false;
@@ -374,9 +378,9 @@ let UtilFn = {
                     }
                     break;
                 case 'js_inputPsw': // 密码
-                    if (UtilFn.isPasswordValid(value)) {
+                    if (that.isPasswordValid(value)) {
                         bValid = true;
-                        UtilFn.updateFormLS({
+                        that.updateFormLS({
                             bValid,
                             symbol: attrObj.symbol,
                             target: oTarget
@@ -425,13 +429,13 @@ let UtilFn = {
             }
 
             if (bValid) {
-                UtilFn.updateFormLS({
+                that.updateFormLS({
                     bValid,
                     symbol: attrObj.symbol,
                     target: oTarget
                 });
             } else {
-                UtilFn.updateFormLS({
+                that.updateFormLS({
                     bValid,
                     symbol: attrObj.symbol,
                     target: oTarget,
@@ -440,7 +444,7 @@ let UtilFn = {
                     order: attrObj.order,
                     msg: errorMsg
                 });
-                return UtilFn.setTip(errorMsg);
+                return that.setTip(errorMsg);
             }
 
             // 内容符合条件
@@ -465,9 +469,9 @@ let UtilFn = {
                 }
             });
         }
-    },
+    }
     // 更新localstorage里的form表单信息，用于提交时检查使用
-    updateFormLS: function (oParams) {
+    updateFormLS(oParams) {
         let bValid = oParams.bValid,
             symbol = oParams.symbol,
             target = oParams.target,
@@ -496,16 +500,16 @@ let UtilFn = {
                 order,
                 msg
             };
-            UtilFn.updateFormLSError(errorList, errorItem);
+            this.updateFormLSError(errorList, errorItem);
         }
 
         localData.error = errorList;
         localData.inputBlur = bValid ? "false" : "true";
         localStorage.setItem(symbol, JSON.stringify(localData));
         console.log(localStorage.getItem(symbol));
-    },
+    }
     // 更新localstorage里的form表单错误信息
-    updateFormLSError: function (errorList, errorItem) {
+    updateFormLSError(errorList, errorItem) {
         if (errorList.length) {
             errorList.every((item, index, arr) => {
                 if (Number(errorItem.order) < Number(item.order)) {
@@ -519,14 +523,15 @@ let UtilFn = {
         } else {
             errorList.push(errorItem);
         }
-    },
+    }
 
 
     /**
      * 设置form表单提交按钮
      * 
      */
-    setSubmitBtn: function (target, validCallback) {
+    setSubmitBtn(target, validCallback) {
+        let that = this;
         let symbol = $(target).parents('form').attr('data-symbol');
         $(target).bind('click', function () {
             $(this).parents('form').find('input').parent().removeClass('w_input_Warn'); // 重置表单内输入框的错误样式
@@ -542,7 +547,7 @@ let UtilFn = {
                     localData.inputBlur = 'false';
                     localStorage.setItem(symbol, JSON.stringify(localData));
                 } else { // 非输入框失焦，提示高优先级错误
-                    UtilFn.setTip(errorList[0].msg);
+                    that.setTip(errorList[0].msg);
                 }
                 return;
             }
@@ -550,7 +555,6 @@ let UtilFn = {
             console.log('检查通过回调');
         });
     }
-
 }
 
-export {UtilFn};
+export default new UtilFn();
