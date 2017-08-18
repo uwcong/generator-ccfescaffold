@@ -94,10 +94,6 @@ module.exports = generators.extend({
             this.props
         );
         this.fs.copy(
-            this.templatePath('gulpfile.js'),
-            this.destinationPath('gulpfile.js')
-        );
-        this.fs.copy(
             this.templatePath('LICENSE'),
             this.destinationPath('LICENSE')
         );
@@ -108,6 +104,10 @@ module.exports = generators.extend({
         this.fs.copy(
             this.templatePath('app'),
             this.destinationPath('app')
+        );
+        this.fs.copy(
+            this.templatePath('webpack_config'),
+            this.destinationPath('webpack_config')
         );
     },
 
