@@ -1,16 +1,14 @@
+import Style from '../sass/main.scss';
 import $ from 'jquery';
 import FastClick from 'fastclick';
 import CommonVar from './module/common/_var.js';
 import UtilFn from './module/common/_util.js';
-
-console.log(UtilFn);
 
 $(function() {
     FastClick.attach(document.body);
 
     $('#triggerTip').bind('click', function () {
         UtilFn.setTip('TIP');
-        console.log(1);
     });
 
     $('#triggerDialog').bind('click', function () {

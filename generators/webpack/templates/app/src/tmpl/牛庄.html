@@ -1,0 +1,120 @@
+<html lang="zh-Hans"><head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="format-detection" content="telephone=no">
+    <title>牛庄</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            background: #eaeaea;
+        }
+        
+        img {
+            display: block;
+            width: 100%;
+            border: 0;
+        }
+        
+        .m_desc {
+            margin: 3% 3% 0;
+            font-size: 14px;
+            line-height: 20px;
+            color: #666;
+        }
+        
+        .m_download {
+            margin-top: 3%;
+            text-align: center;
+            font-size: 0;
+            line-height: 0;
+            background: #fff;
+        }
+        
+        .m_download a {
+            display: inline-block;
+            width: 45%;
+            margin: 0 1.5%;
+            padding: 5px 0 20px;
+            background: #fff;
+            border-radius: 4px;
+        }
+        .m_copyright {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 14px;
+            color: #999;
+        }
+        .m_copyright .warn {
+            line-height: 24px;
+        }
+        .m_copyright .info {
+            margin-top: 10px;
+            color: #666;
+        }
+    </style>
+<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+</head>
+
+<body ontouchstart="">
+     <div class="m_banner"><img src="http://static.imyunshang.com/nn/nn_banner.png" alt=""></div> 
+    <div class="m_desc">微信不允许直接下载文件，请点击右上角分享按钮，选择在浏览器中打开，或者复制链接到浏览器打开</div>
+    <div class="m_download">
+         <a href="javascript:;"><img src="http://static.imyunshang.com/nn/nn_192.png" alt=""><img src="http://static.imyunshang.com/com/download_btn.png" alt=""></a> 
+    </div>
+    <div class="m_copyright">
+        健康游戏忠告：
+        <p class="warn">抵制不良游戏 拒绝盗版游戏 注意自我保护<br/>谨防受骗上当 适度游戏益脑 沉迷游戏伤身<br />合理安排时间 享受健康生活</p>
+        <p class="info">惠州云上世纪网络科技有限公司<br />粤ICP备17048821号-1<br />Copyright © 2016-2017</p>
+    </div>
+
+<script>
+    var linkiOS = ""
+    var linkAndroid = "http://static.imyunshang.com/apk/Cow201708121548-release.apk"
+    function isiOS() {
+        return !!navigator.userAgent.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);
+    }
+    function isAndriod() {
+        return /android/.test(navigator.userAgent.toLowerCase());
+    }
+    function isWeChat() {
+        return /micromessenger/.test(navigator.userAgent.toLowerCase());
+    }
+    function isPc() {
+        var userAgentInfo = navigator.userAgent.toLowerCase();
+        var agents = ["android", "iphone", "ipad", "ipod", "symbianos", "windows phone"];
+        var flag = true;
+        for (var i = 0; i < agents.length; i++) {
+            if (userAgentInfo.indexOf(agents[i]) > 0) {
+                flag = false;
+                break;
+            }
+        }
+        return flag;
+    }
+    $(document).ready(function(){
+        $(".m_download").click(function(){
+            if (isWeChat()) {
+                var text = "请点击微信右上角按钮，然后在弹出的菜单中，点击在浏览器打开。";
+                if (isiOS()) {
+                    text = "请点击微信右上角按钮，然后在弹出的菜单中，点击在Safari中打开。";
+                }
+                alert(text)
+            } else if(isiOS()) {
+                if (linkiOS == "") {
+                    alert("iOS版即将上线，敬请期待！");
+                } else {
+                    location.href = linkiOS
+                }
+            } else {
+                location.href = linkAndroid
+            }
+        })
+    })
+</script>
+
+</body></html>

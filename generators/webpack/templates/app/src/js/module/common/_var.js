@@ -29,5 +29,4 @@ class CommonVar {
     }
 }
 
-
 export default new CommonVar();

@@ -13,7 +13,7 @@ $defaultSpace: 50px;
 
 /* compass Helper */
 
-@import "compass";
+// @import "compass";
 
 /* helper */
 
@@ -221,7 +221,7 @@ $navListSpace: 25px;
     }
 }
 
-$logoIconWidth: image-width("../images/icon_account_2x.png");
+$logoIconWidth: 40px;
 .m_navList_Uc {
     .item li {
         position: relative;

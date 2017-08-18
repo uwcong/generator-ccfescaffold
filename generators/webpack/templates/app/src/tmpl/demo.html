@@ -2,13 +2,12 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="format-detection" content="telephone=no" />
-    <title>Rebate</title>
-    <link rel="shortcut icon" type="image/x-icon" href="https://rebate.130qq.com/static/images/favicon.ico">
-    <link href="../css/main.css" rel="stylesheet">
+    <meta charset="<%= htmlWebpackPlugin.options.charset %>">
+    <meta http-equiv="<%= htmlWebpackPlugin.options.httpEquiv %>" content="<%= htmlWebpackPlugin.options.httpEquivContent %>">
+    <meta name="<%= htmlWebpackPlugin.options.viewport %>" content="<%= htmlWebpackPlugin.options.viewportContent %>">
+    <meta name="<%= htmlWebpackPlugin.options.formatDetection %>" content="<%= htmlWebpackPlugin.options.formatDetectionContent %>" />
+    <title><%= htmlWebpackPlugin.options.title %></title>
+    <link rel="shortcut icon" type="image/x-icon" href="https://rebate.130qq.com/static/images/favicon.ico"> 
     <script>
         (function () {
             var docEl = document.documentElement,
@@ -46,7 +45,7 @@
 
 <body ontouchstart="">
     <section class="block block_ButtonList">
-          <h1>BUTTON</h1>  
+        <h1>BUTTON</h1>  
         <span class="w_button">Button</span>
         <span class="w_button w_button_Hollow">Button</span>
         <span class="w_button w_button_Disabled">Button</span>
@@ -70,8 +69,7 @@
                 <tag-input data-id="email" data-class="js_inputEm" data-type="text" data-value="" data-label="Email" data-order="0"></tag-input>
             </section>
             <section class="m_formGroup">
-                <tag-input data-id="phone" data-class="js_inputPh" data-type="text" data-value="" data-label="PhonePhonePhonePhonePhonePhonePhonePhonePhonePhonePhonePhone"
-                    data-order="1"></tag-input>
+                <tag-input data-id="phone" data-class="js_inputPh" data-type="text" data-value="" data-label="Phone" data-order="1"></tag-input>
             </section>
             <section class="m_formGroup">
                 <tag-input data-id="password" data-class="js_inputPsw" data-type="password" data-value="" data-label="Password" data-order="2"></tag-input>
@@ -101,13 +99,6 @@
         <span class="w_button" id="triggerLoading">Click to get the loading</span>
     </section>
 
-    <!-- <script>
-        $('body').click(function (event) {
-            if ($(event.target).attr('id') === 'popupMask') {
-                $('#popup').remove();
-            }
-        });
-    </script> -->
 </body>
 
 </html>

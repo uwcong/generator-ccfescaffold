@@ -28,7 +28,7 @@
         margin: px2rem(10px) auto px2rem(15px);
         width: 41px;
         height: 41px;
-        background: inline-image("../images/icon_loading_2x.png") no-repeat;
+        background: url("../images/icon_loading_2x.png") no-repeat;
         background-size: contain;
         @extend %gpu_accelerate;
         @include animation(loading .8s linear infinite);

@@ -6,42 +6,69 @@
 
 var Webpack = require('webpack');
 var Path = require('path');
+var HtmlWebpackPlugin = require('html-webpack-plugin');
 var UglifyJsPlugin = Webpack.optimize.UglifyJsPlugin;
 var CommonsChunkPlugin = Webpack.optimize.CommonsChunkPlugin;
+var htmlMetas = {
+  charset: 'utf-8',
+  httpEquiv: 'X-UA-Compatible',
+  httpEquivContent: 'IE=edge',
+  viewport: 'viewport',
+  viewportContent: 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no',
+  formatDetection: 'format-detection',
+  formatDetectionContent: 'telephone=no'
+}
 
 module.exports = {
   entry: {
     main: [Path.resolve(__dirname, '../app/src/js/main.js')], // 定义入口文件
-    vendor: ['jquery', 'fastclick'],
-  },
-  output: { // 定义出口目录
-    // path: path.resolve(__dirname, '../app/src'),
-    // filename: '[name].js',
-    // publicPath: './'
-    // filename: '[name].js',
-    // publicPath: '/abb/'
   },
   resolve: { // resolve 指定可以被 import 的文件后缀
-    extensions: ['.js']
+    extensions: [' ', '.js', 'jsx']
   },
   module: {
-    rules: [{
+    rules: [
+      {
         test: /\.js[x]?$/,
-        use: 'babel-loader',
-        include: Path.resolve(__dirname, '../app/src/js')
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['es2015', 'react']
+          }
+        },
+        exclude: /node_modules/
       },
-      // {
-      //   test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
-      //   loader: 'url-loader',
-      //   options: {
-      //     limit: 10000,
-      //     name: Path.posix.join(config.build.assetsSubDirectory, 'img/[name].[hash:7].[ext]'),
-      //   }
-      // }
+      {
+        test: /\.(jpe?g|png|gif|woff|woff2|eot|ttf|svg)$/,
+        use: {
+          loader: 'url-loader',
+          options: {
+            limit: 2048,
+            name: 'images/[name].[ext]'
+          }
+        }
+      }
     ]
   },
   plugins: [
-
     // new CommonsChunkPlugin({name: 'vendor', filenames: })
+
+    // 调用多次生成多个HTML文件
+    // 这里 http://0.0.0.0:8080/index.html 访问的是由webpack通过模板文件生成的页面
+    new HtmlWebpackPlugin({
+      title: 'Demo',
+      template: Path.resolve(__dirname, '../app/src/tmpl/demo.html'), //依据的模板
+      filename: 'index.html', //生成的html的文件名
+      inject: true, //注入的js文件将会被放在body标签中,当值为'head'时，将被放在head标签中
+      // chunks: string[], // 设置包含的chunk 
+      // excludeChunks: string[], // 设置不包含的chunk
+      charset: htmlMetas.charset,
+      httpEquiv: htmlMetas.httpEquiv,
+      httpEquivContent: htmlMetas.httpEquivContent,
+      viewport: htmlMetas.viewport,
+      viewportContent: htmlMetas.viewportContent,
+      formatDetection: htmlMetas.formatDetection,
+      formatDetectionContent: htmlMetas.formatDetectionContent
+    }),
   ]
 }
