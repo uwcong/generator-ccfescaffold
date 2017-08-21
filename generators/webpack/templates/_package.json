@@ -2,7 +2,10 @@
     "name": "<%= name %>",
     "version": "0.0.1",
     "description": "<%= description %>",
-    "main": "index.js",
+    "scripts": {
+        "dev": "nodemon --watch webpack_config --exec \"node webpack_config/develop.js\"",
+        "build": "node webpack_config/build.js"
+    },
     "author": "<%= author %>",
     "repository": {
         "type": "git",
