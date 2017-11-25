@@ -7,6 +7,27 @@ import UtilFn from './module/common/_util.js';
 $(function() {
     FastClick.attach(document.body);
 
+    $.get('/femock/getDemo?id=1', function( data ) {
+        console.log(data);
+    });
+
+    $.ajax({
+        url: '/femock/postDemo',
+        type: 'POST',
+        data: {
+            "id": "1"
+        },
+        dataType: 'JSON',
+        success: function (data, textStatus, jqXHR) {
+            console.log("%c mock response: ", "background: green;color: #fff", data);
+        },
+        timeout: 10000,
+        error: function (jqXHR, textStatus, errorThrown) {
+            console.log("%c mock response: ", "background: red;color: #fff", jqXHR);
+            console.log("%c mock response: ", "background: red;color: #fff", textStatus);
+        }
+    });
+
     $('#triggerTip').bind('click', function () {
         UtilFn.setTip('TIP');
     });
